@@ -11,10 +11,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-/*
- * git test
- * test 212313153
- */ 
+
 
 namespace Robot
 {
