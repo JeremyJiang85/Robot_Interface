@@ -22,8 +22,8 @@ namespace Robot
         public string IP = "";
         public string AlarmContent = "";
         public string[][] PositionText;
-        public Single[] xyzwpr = { 0, 0, 0, 0, 0, 0, 0, 0, 0 };
-        public Single[] joint = { 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+        public Single[] xyzwpr = new Single[] { 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+        public Single[] joint = new Single[] { 0, 0, 0, 0, 0, 0, 0, 0, 0 };
 
         public bool ConnectStatus_fg = false;
 
@@ -38,11 +38,24 @@ namespace Robot
         {
             Alarm_lbl.Text = "";
             Xyzwpr_lbl.Text = "卡式座標\r\nX : \r\nY : \r\nZ : \r\nW: \r\nP : \r\nR : ";
+            XSet_tb.Text = "";
+            YSet_tb.Text = "";
+            ZSet_tb.Text = "";
+            WSet_tb.Text = "";
+            PSet_tb.Text = "";
+            RSet_tb.Text = "";
             Joint_lbl.Text = "軸座標\r\nJ1 : \r\nJ2 : \r\nJ3 : \r\nJ4 : \r\nJ5 : \r\nJ6 : ";
+            J1Set_tb.Text = "";
+            J2Set_tb.Text = "";
+            J3Set_tb.Text = "";
+            J4Set_tb.Text = "";
+            J5Set_tb.Text = "";
+            J6Set_tb.Text = "";
             Override_lbl.Text = "";
             Register_lbl.Text = "R1   =\r\nR2   =";
             R1Set_tb.Text = "";
             R2Set_tb.Text = "";
+
             Alarm_gb.Enabled = true;
             CurrentPosition_gb.Enabled = true;
             Override_gb.Enabled = true;
@@ -62,9 +75,22 @@ namespace Robot
             Register_gb.Enabled = false;
             卡式座標Set_gb.Enabled = false;
             軸座標Set_gb.Enabled = false;
+
             Alarm_lbl.Text = "";
             Xyzwpr_lbl.Text = "卡式座標\r\nX : \r\nY : \r\nZ : \r\nW: \r\nP : \r\nR : ";
+            XSet_tb.Text = "";
+            YSet_tb.Text = "";
+            ZSet_tb.Text = "";
+            WSet_tb.Text = "";
+            PSet_tb.Text = "";
+            RSet_tb.Text = "";
             Joint_lbl.Text = "軸座標\r\nJ1 : \r\nJ2 : \r\nJ3 : \r\nJ4 : \r\nJ5 : \r\nJ6 : ";
+            J1Set_tb.Text = "";
+            J2Set_tb.Text = "";
+            J3Set_tb.Text = "";
+            J4Set_tb.Text = "";
+            J5Set_tb.Text = "";
+            J6Set_tb.Text = "";
             Override_lbl.Text = "";
             Register_lbl.Text = "R1   =\r\nR2   =";
             R1Set_tb.Text = "";
@@ -80,14 +106,15 @@ namespace Robot
                 if (fanuc.Connect(IP))
                 {
                     Initialize();
+
                     ConnectStatus_fg = true;
                     Connect_btn.Text = "Disconnect";
                     Connect_lbl.Text = "Connecting";
-
+                    
                     xyzwpr[0] = 180;
                     xyzwpr[1] = 0;
                     xyzwpr[2] = 280;
-                    xyzwpr[3] = -180;
+                    xyzwpr[3] = 180;
                     xyzwpr[4] = 0;
                     xyzwpr[5] = 0;
                     fanuc.CPositionSet(xyzwpr);
@@ -188,7 +215,18 @@ namespace Robot
 
             fanuc.JPositionSet(joint);
         }
-        
+
+        private void InitialPoint_btn_Click(object sender, EventArgs e)
+        {
+            xyzwpr[0] = 180;
+            xyzwpr[1] = 0;
+            xyzwpr[2] = 280;
+            xyzwpr[3] = 180;
+            xyzwpr[4] = 0;
+            xyzwpr[5] = 0;
+
+            fanuc.CPositionSet(xyzwpr);
+        }
     }
 
     //==============================class Fanuc==============================

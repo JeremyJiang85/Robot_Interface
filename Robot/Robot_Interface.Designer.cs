@@ -49,6 +49,7 @@
             this.Override_gb = new System.Windows.Forms.GroupBox();
             this.Override_lbl = new System.Windows.Forms.Label();
             this.卡式座標Set_gb = new System.Windows.Forms.GroupBox();
+            this.InitialPoint_btn = new System.Windows.Forms.Button();
             this.SafeRange_lbl = new System.Windows.Forms.Label();
             this.GetNowCPosition_btn = new System.Windows.Forms.Button();
             this.SetCPosition_btn = new System.Windows.Forms.Button();
@@ -79,6 +80,8 @@
             this.J3Set_lbl = new System.Windows.Forms.Label();
             this.J2Set_lbl = new System.Windows.Forms.Label();
             this.J1Set_lbl = new System.Windows.Forms.Label();
+            this.Move_gb = new System.Windows.Forms.GroupBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.Connect_gb.SuspendLayout();
             this.Alarm_gb.SuspendLayout();
             this.CurrentPosition_gb.SuspendLayout();
@@ -86,6 +89,7 @@
             this.Override_gb.SuspendLayout();
             this.卡式座標Set_gb.SuspendLayout();
             this.軸座標Set_gb.SuspendLayout();
+            this.Move_gb.SuspendLayout();
             this.SuspendLayout();
             // 
             // HostName_tb
@@ -198,7 +202,7 @@
             this.Register_gb.Controls.Add(this.R1Set_lbl);
             this.Register_gb.Controls.Add(this.Register_lbl);
             this.Register_gb.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.Register_gb.Location = new System.Drawing.Point(12, 362);
+            this.Register_gb.Location = new System.Drawing.Point(777, 159);
             this.Register_gb.Name = "Register_gb";
             this.Register_gb.Size = new System.Drawing.Size(126, 189);
             this.Register_gb.TabIndex = 6;
@@ -283,6 +287,7 @@
             // 
             // 卡式座標Set_gb
             // 
+            this.卡式座標Set_gb.Controls.Add(this.InitialPoint_btn);
             this.卡式座標Set_gb.Controls.Add(this.SafeRange_lbl);
             this.卡式座標Set_gb.Controls.Add(this.GetNowCPosition_btn);
             this.卡式座標Set_gb.Controls.Add(this.SetCPosition_btn);
@@ -301,10 +306,22 @@
             this.卡式座標Set_gb.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.卡式座標Set_gb.Location = new System.Drawing.Point(320, 159);
             this.卡式座標Set_gb.Name = "卡式座標Set_gb";
-            this.卡式座標Set_gb.Size = new System.Drawing.Size(324, 252);
+            this.卡式座標Set_gb.Size = new System.Drawing.Size(284, 252);
             this.卡式座標Set_gb.TabIndex = 8;
             this.卡式座標Set_gb.TabStop = false;
             this.卡式座標Set_gb.Text = "卡式座標Set";
+            // 
+            // InitialPoint_btn
+            // 
+            this.InitialPoint_btn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.InitialPoint_btn.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.InitialPoint_btn.Location = new System.Drawing.Point(160, 203);
+            this.InitialPoint_btn.Name = "InitialPoint_btn";
+            this.InitialPoint_btn.Size = new System.Drawing.Size(117, 40);
+            this.InitialPoint_btn.TabIndex = 10;
+            this.InitialPoint_btn.Text = "Initial Point";
+            this.InitialPoint_btn.UseVisualStyleBackColor = true;
+            this.InitialPoint_btn.Click += new System.EventHandler(this.InitialPoint_btn_Click);
             // 
             // SafeRange_lbl
             // 
@@ -345,7 +362,6 @@
             this.RSet_tb.Name = "RSet_tb";
             this.RSet_tb.Size = new System.Drawing.Size(108, 23);
             this.RSet_tb.TabIndex = 11;
-            this.RSet_tb.Text = "1312";
             this.RSet_tb.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // PSet_tb
@@ -356,7 +372,6 @@
             this.PSet_tb.Name = "PSet_tb";
             this.PSet_tb.Size = new System.Drawing.Size(108, 23);
             this.PSet_tb.TabIndex = 10;
-            this.PSet_tb.Text = "1312";
             this.PSet_tb.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // WSet_tb
@@ -367,7 +382,6 @@
             this.WSet_tb.Name = "WSet_tb";
             this.WSet_tb.Size = new System.Drawing.Size(108, 23);
             this.WSet_tb.TabIndex = 9;
-            this.WSet_tb.Text = "1312";
             this.WSet_tb.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // ZSet_tb
@@ -378,7 +392,6 @@
             this.ZSet_tb.Name = "ZSet_tb";
             this.ZSet_tb.Size = new System.Drawing.Size(108, 23);
             this.ZSet_tb.TabIndex = 8;
-            this.ZSet_tb.Text = "1312";
             this.ZSet_tb.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // YSet_tb
@@ -389,7 +402,6 @@
             this.YSet_tb.Name = "YSet_tb";
             this.YSet_tb.Size = new System.Drawing.Size(108, 23);
             this.YSet_tb.TabIndex = 7;
-            this.YSet_tb.Text = "1312";
             this.YSet_tb.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // XSet_tb
@@ -400,7 +412,6 @@
             this.XSet_tb.Name = "XSet_tb";
             this.XSet_tb.Size = new System.Drawing.Size(108, 23);
             this.XSet_tb.TabIndex = 6;
-            this.XSet_tb.Text = "1312";
             this.XSet_tb.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // RSet_lbl
@@ -474,7 +485,7 @@
             this.軸座標Set_gb.Controls.Add(this.J2Set_lbl);
             this.軸座標Set_gb.Controls.Add(this.J1Set_lbl);
             this.軸座標Set_gb.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.軸座標Set_gb.Location = new System.Drawing.Point(739, 159);
+            this.軸座標Set_gb.Location = new System.Drawing.Point(610, 159);
             this.軸座標Set_gb.Name = "軸座標Set_gb";
             this.軸座標Set_gb.Size = new System.Drawing.Size(161, 252);
             this.軸座標Set_gb.TabIndex = 9;
@@ -500,7 +511,6 @@
             this.J6Set_tb.Name = "J6Set_tb";
             this.J6Set_tb.Size = new System.Drawing.Size(108, 23);
             this.J6Set_tb.TabIndex = 11;
-            this.J6Set_tb.Text = "1312";
             this.J6Set_tb.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // GetNowJPosition_btn
@@ -522,7 +532,6 @@
             this.J5Set_tb.Name = "J5Set_tb";
             this.J5Set_tb.Size = new System.Drawing.Size(108, 23);
             this.J5Set_tb.TabIndex = 10;
-            this.J5Set_tb.Text = "1312";
             this.J5Set_tb.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // J4Set_tb
@@ -533,7 +542,6 @@
             this.J4Set_tb.Name = "J4Set_tb";
             this.J4Set_tb.Size = new System.Drawing.Size(108, 23);
             this.J4Set_tb.TabIndex = 9;
-            this.J4Set_tb.Text = "1312";
             this.J4Set_tb.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // J3Set_tb
@@ -544,7 +552,6 @@
             this.J3Set_tb.Name = "J3Set_tb";
             this.J3Set_tb.Size = new System.Drawing.Size(108, 23);
             this.J3Set_tb.TabIndex = 8;
-            this.J3Set_tb.Text = "1312";
             this.J3Set_tb.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // J2Set_tb
@@ -555,7 +562,6 @@
             this.J2Set_tb.Name = "J2Set_tb";
             this.J2Set_tb.Size = new System.Drawing.Size(108, 23);
             this.J2Set_tb.TabIndex = 7;
-            this.J2Set_tb.Text = "1312";
             this.J2Set_tb.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // J1Set_tb
@@ -566,7 +572,6 @@
             this.J1Set_tb.Name = "J1Set_tb";
             this.J1Set_tb.Size = new System.Drawing.Size(108, 23);
             this.J1Set_tb.TabIndex = 6;
-            this.J1Set_tb.Text = "1312";
             this.J1Set_tb.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // J6Set_lbl
@@ -623,11 +628,32 @@
             this.J1Set_lbl.TabIndex = 0;
             this.J1Set_lbl.Text = "J1:";
             // 
+            // Move_gb
+            // 
+            this.Move_gb.Controls.Add(this.label1);
+            this.Move_gb.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.Move_gb.Location = new System.Drawing.Point(12, 350);
+            this.Move_gb.Name = "Move_gb";
+            this.Move_gb.Size = new System.Drawing.Size(302, 220);
+            this.Move_gb.TabIndex = 10;
+            this.Move_gb.TabStop = false;
+            this.Move_gb.Text = "Move";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(6, 29);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(58, 21);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "label1";
+            // 
             // Robot_Interface
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(984, 582);
+            this.Controls.Add(this.Move_gb);
             this.Controls.Add(this.軸座標Set_gb);
             this.Controls.Add(this.卡式座標Set_gb);
             this.Controls.Add(this.Override_gb);
@@ -652,6 +678,8 @@
             this.卡式座標Set_gb.PerformLayout();
             this.軸座標Set_gb.ResumeLayout(false);
             this.軸座標Set_gb.PerformLayout();
+            this.Move_gb.ResumeLayout(false);
+            this.Move_gb.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -708,6 +736,9 @@
         private System.Windows.Forms.Label J2Set_lbl;
         private System.Windows.Forms.Label J1Set_lbl;
         private System.Windows.Forms.Label SafeRange_lbl;
+        private System.Windows.Forms.Button InitialPoint_btn;
+        private System.Windows.Forms.GroupBox Move_gb;
+        private System.Windows.Forms.Label label1;
     }
 }
 
