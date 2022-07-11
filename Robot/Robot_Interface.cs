@@ -22,8 +22,8 @@ namespace Robot
         public string IP = "";
         public string AlarmContent = "";
         public string[][] PositionText;
-        public Single[] xyzwpr = new Single[9] { 0, 0, 0, 0, 0, 0, 0, 0, 0 };
-        public Single[] joint = new Single[9] { 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+        public Single[] xyzwpr = { 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+        public Single[] joint = { 0, 0, 0, 0, 0, 0, 0, 0, 0 };
 
         public bool ConnectStatus_fg = false;
 
@@ -50,6 +50,7 @@ namespace Robot
             卡式座標Set_gb.Enabled = true;
             軸座標Set_gb.Enabled = true;
             timer1.Enabled = true;
+            fanuc.Refresh();
         }
 
         public void Deinitialize()
@@ -82,6 +83,14 @@ namespace Robot
                     ConnectStatus_fg = true;
                     Connect_btn.Text = "Disconnect";
                     Connect_lbl.Text = "Connecting";
+
+                    xyzwpr[0] = 180;
+                    xyzwpr[1] = 0;
+                    xyzwpr[2] = 280;
+                    xyzwpr[3] = -180;
+                    xyzwpr[4] = 0;
+                    xyzwpr[5] = 0;
+                    fanuc.CPositionSet(xyzwpr);
                 }
                 else
                 {
@@ -387,18 +396,39 @@ namespace Robot
             short ValidC = 0;
             short ValidJ = 0;
 
-            if (currentPosition_fg = mobjCurPos.GetValue(ref Xyzwpr, ref Config, ref Joint, ref UF, ref UT, ref ValidC, ref ValidJ))
+            if (xyzwpr[0] >= 0 && xyzwpr[0] <= 700)
             {
-                int Index = 1;
-
-                if (!(setCPosition_fg = mobjPosReg.SetValueXyzwpr(Index, xyzwpr, Config, UF, UT)))
+                if (xyzwpr[1] >= -500 && xyzwpr[1] <= 600)
                 {
-                    MessageBox.Show("卡式座標設定失敗");
+                    if (xyzwpr[2] >= -130 && xyzwpr[2] <= 500)
+                    {
+                        if (currentPosition_fg = mobjCurPos.GetValue(ref Xyzwpr, ref Config, ref Joint, ref UF, ref UT, ref ValidC, ref ValidJ))
+                        {
+                            int Index = 1;
+
+                            if (!(setCPosition_fg = mobjPosReg.SetValueXyzwpr(Index, xyzwpr, Config, UF, UT)))
+                            {
+                                MessageBox.Show("卡式座標設定失敗");
+                            }
+                        }
+                        else
+                        {
+                            MessageBox.Show("取得目前卡式座標失敗");
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("Z座標超出安全範圍");
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Y座標超出安全範圍");
                 }
             }
             else
             {
-                MessageBox.Show("卡式座標設定失敗");
+                MessageBox.Show("X座標超出安全範圍");
             }
         }
 
@@ -423,7 +453,7 @@ namespace Robot
             }
             else
             {
-                MessageBox.Show("軸座標設定失敗");
+                MessageBox.Show("取得目前軸座標失敗");
             }
         }
 

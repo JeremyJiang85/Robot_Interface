@@ -49,6 +49,7 @@
             this.Override_gb = new System.Windows.Forms.GroupBox();
             this.Override_lbl = new System.Windows.Forms.Label();
             this.卡式座標Set_gb = new System.Windows.Forms.GroupBox();
+            this.SafeRange_lbl = new System.Windows.Forms.Label();
             this.GetNowCPosition_btn = new System.Windows.Forms.Button();
             this.SetCPosition_btn = new System.Windows.Forms.Button();
             this.RSet_tb = new System.Windows.Forms.TextBox();
@@ -282,6 +283,7 @@
             // 
             // 卡式座標Set_gb
             // 
+            this.卡式座標Set_gb.Controls.Add(this.SafeRange_lbl);
             this.卡式座標Set_gb.Controls.Add(this.GetNowCPosition_btn);
             this.卡式座標Set_gb.Controls.Add(this.SetCPosition_btn);
             this.卡式座標Set_gb.Controls.Add(this.RSet_tb);
@@ -303,6 +305,15 @@
             this.卡式座標Set_gb.TabIndex = 8;
             this.卡式座標Set_gb.TabStop = false;
             this.卡式座標Set_gb.Text = "卡式座標Set";
+            // 
+            // SafeRange_lbl
+            // 
+            this.SafeRange_lbl.AutoSize = true;
+            this.SafeRange_lbl.Location = new System.Drawing.Point(160, 29);
+            this.SafeRange_lbl.Name = "SafeRange_lbl";
+            this.SafeRange_lbl.Size = new System.Drawing.Size(117, 84);
+            this.SafeRange_lbl.TabIndex = 14;
+            this.SafeRange_lbl.Text = "SafeRange\r\nX : 0~700\r\nY : -500~600\r\nZ : -130~500";
             // 
             // GetNowCPosition_btn
             // 
@@ -696,6 +707,7 @@
         private System.Windows.Forms.Label J3Set_lbl;
         private System.Windows.Forms.Label J2Set_lbl;
         private System.Windows.Forms.Label J1Set_lbl;
+        private System.Windows.Forms.Label SafeRange_lbl;
     }
 }
 
