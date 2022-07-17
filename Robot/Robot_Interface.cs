@@ -44,6 +44,7 @@ namespace Robot
             WJ4Set_tb.Text = "";
             PJ5Set_tb.Text = "";
             RJ6Set_tb.Text = "";
+            Velocity_tb.Text = "100";
             Joint_lbl.Text = "軸座標\r\nJ1 : \r\nJ2 : \r\nJ3 : \r\nJ4 : \r\nJ5 : \r\nJ6 : ";
             Override_lbl.Text = "";
             Register_lbl.Text = "R1   =\r\nR2   =";
@@ -99,6 +100,7 @@ namespace Robot
             WJ4Set_tb.Text = "";
             PJ5Set_tb.Text = "";
             RJ6Set_tb.Text = "";
+            Velocity_tb.Text = "";
             Joint_lbl.Text = "軸座標\r\nJ1 : \r\nJ2 : \r\nJ3 : \r\nJ4 : \r\nJ5 : \r\nJ6 : ";
             Override_lbl.Text = "";
             Register_lbl.Text = "R1   =\r\nR2   =";
@@ -111,6 +113,7 @@ namespace Robot
             WJ4Set_lbl.Text = "";
             PJ5Set_lbl.Text = "";
             RJ6Set_lbl.Text = "";
+
             PositionMove_cb.SelectedItem = null;
             XJ1Negative_btn.Text = "";
             YJ2Negative_btn.Text = "";
@@ -147,7 +150,7 @@ namespace Robot
                     xyzwpr[4] = 0;
                     xyzwpr[5] = 0;
                     fanuc.CPositionSet(xyzwpr);
-
+                    fanuc.RegisterSet(11, 100);
                 }
                 else
                 {
@@ -179,6 +182,7 @@ namespace Robot
             Joint_lbl.Text = PositionText[0][1];
             Override_lbl.Text = fanuc.Override();
             Register_lbl.Text = fanuc.Register();
+            Velocity_lbl.Text = fanuc.Velocity();
         }
 
         private void RegisterSet_btn_Click(object sender, EventArgs e)
@@ -208,6 +212,11 @@ namespace Robot
         }
 
         private void R2Set_tb_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            RegisterSetKeyPressCheck(e);
+        }
+
+        private void Velocity_tb_KeyPress(object sender, KeyPressEventArgs e)
         {
             RegisterSetKeyPressCheck(e);
         }
@@ -252,9 +261,10 @@ namespace Robot
             {
                 if (string.IsNullOrEmpty(XJ1Set_tb.Text) || string.IsNullOrEmpty(YJ2Set_tb.Text) ||
                     string.IsNullOrEmpty(ZJ3Set_tb.Text) || string.IsNullOrEmpty(WJ4Set_tb.Text) ||
-                    string.IsNullOrEmpty(PJ5Set_tb.Text) || string.IsNullOrEmpty(RJ6Set_tb.Text))
+                    string.IsNullOrEmpty(PJ5Set_tb.Text) || string.IsNullOrEmpty(RJ6Set_tb.Text) ||
+                    string.IsNullOrEmpty(Velocity_tb.Text))
                 {
-                    MessageBox.Show("座標值不可有空白");
+                    MessageBox.Show("座標值和速度值不可有空白");
                 }
                 else
                 {
@@ -268,6 +278,7 @@ namespace Robot
                         xyzwpr[5] = Convert.ToSingle(RJ6Set_tb.Text);
 
                         fanuc.CPositionSet(xyzwpr);
+                        fanuc.RegisterSet(11, Convert.ToSingle(Velocity_tb.Text));
                     }
 
                     if ((string)PositionSet_cb.SelectedItem == "軸座標")
@@ -280,6 +291,7 @@ namespace Robot
                         joint[5] = Convert.ToSingle(RJ6Set_tb.Text);
 
                         fanuc.JPositionSet(joint);
+                        fanuc.RegisterSet(11, Convert.ToSingle(Velocity_tb.Text));
                     }
                 }
             }
@@ -460,6 +472,8 @@ namespace Robot
         {
             fanuc.PositionMove(RJ6Negative_btn.Text);
         }
+
+        
     }
 
     //==============================class Fanuc==============================
@@ -748,7 +762,7 @@ namespace Robot
         public string Register()
         {
             string RegisterText = "";
-            int Index = 0;
+            int Index = 1;
             object Value = null;
 
             for (Index = 1; Index <= 2; Index++)
@@ -771,6 +785,18 @@ namespace Robot
                 }
             }
             return RegisterText;
+        }
+
+        public string Velocity()
+        {
+            string VelocityText = "";
+            int Index = 11;
+            object Value = null;
+
+            if (register_fg = mobjNumReg.GetValue(Index, ref Value))
+            {
+                VelocityText = "R" + Index + "   =   " + Convert.ToString(Value);
+            }
         }
 
         public void RegisterSet(int Index, Single Value)

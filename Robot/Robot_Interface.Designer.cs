@@ -49,6 +49,8 @@
             this.Override_gb = new System.Windows.Forms.GroupBox();
             this.Override_lbl = new System.Windows.Forms.Label();
             this.PositionSet_gb = new System.Windows.Forms.GroupBox();
+            this.Velocity_tb = new System.Windows.Forms.TextBox();
+            this.Velocity_lbl = new System.Windows.Forms.Label();
             this.PositionSet_cb = new System.Windows.Forms.ComboBox();
             this.BackTotheInitialPosition_btn = new System.Windows.Forms.Button();
             this.SafeRange_lbl = new System.Windows.Forms.Label();
@@ -80,8 +82,6 @@
             this.PositionMove_cb = new System.Windows.Forms.ComboBox();
             this.XJ1Positive_btn = new System.Windows.Forms.Button();
             this.XJ1Negative_btn = new System.Windows.Forms.Button();
-            this.Velocity_lbl = new System.Windows.Forms.Label();
-            this.Velocity_tb = new System.Windows.Forms.TextBox();
             this.Connect_gb.SuspendLayout();
             this.Alarm_gb.SuspendLayout();
             this.CurrentPosition_gb.SuspendLayout();
@@ -201,7 +201,7 @@
             this.Register_gb.Controls.Add(this.R1Set_lbl);
             this.Register_gb.Controls.Add(this.Register_lbl);
             this.Register_gb.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.Register_gb.Location = new System.Drawing.Point(613, 159);
+            this.Register_gb.Location = new System.Drawing.Point(677, 159);
             this.Register_gb.Name = "Register_gb";
             this.Register_gb.Size = new System.Drawing.Size(126, 184);
             this.Register_gb.TabIndex = 6;
@@ -310,10 +310,31 @@
             this.PositionSet_gb.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.PositionSet_gb.Location = new System.Drawing.Point(320, 159);
             this.PositionSet_gb.Name = "PositionSet_gb";
-            this.PositionSet_gb.Size = new System.Drawing.Size(287, 278);
+            this.PositionSet_gb.Size = new System.Drawing.Size(293, 278);
             this.PositionSet_gb.TabIndex = 8;
             this.PositionSet_gb.TabStop = false;
             this.PositionSet_gb.Text = "Position Set";
+            // 
+            // Velocity_tb
+            // 
+            this.Velocity_tb.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.Velocity_tb.Font = new System.Drawing.Font("新細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.Velocity_tb.Location = new System.Drawing.Point(163, 204);
+            this.Velocity_tb.Name = "Velocity_tb";
+            this.Velocity_tb.Size = new System.Drawing.Size(123, 23);
+            this.Velocity_tb.TabIndex = 16;
+            this.Velocity_tb.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.Velocity_tb.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.Velocity_tb_KeyPress);
+            // 
+            // Velocity_lbl
+            // 
+            this.Velocity_lbl.AutoSize = true;
+            this.Velocity_lbl.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.Velocity_lbl.Location = new System.Drawing.Point(163, 117);
+            this.Velocity_lbl.Name = "Velocity_lbl";
+            this.Velocity_lbl.Size = new System.Drawing.Size(123, 84);
+            this.Velocity_lbl.TabIndex = 15;
+            this.Velocity_lbl.Text = "Velocity :\r\n輸入100~500\r\n(預設為100)\r\n  (mm/sec)↓";
             // 
             // PositionSet_cb
             // 
@@ -336,7 +357,7 @@
             this.BackTotheInitialPosition_btn.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.BackTotheInitialPosition_btn.Location = new System.Drawing.Point(163, 233);
             this.BackTotheInitialPosition_btn.Name = "BackTotheInitialPosition_btn";
-            this.BackTotheInitialPosition_btn.Size = new System.Drawing.Size(115, 40);
+            this.BackTotheInitialPosition_btn.Size = new System.Drawing.Size(123, 40);
             this.BackTotheInitialPosition_btn.TabIndex = 10;
             this.BackTotheInitialPosition_btn.Text = "Back To The Initial Position";
             this.BackTotheInitialPosition_btn.UseVisualStyleBackColor = true;
@@ -345,10 +366,10 @@
             // SafeRange_lbl
             // 
             this.SafeRange_lbl.AutoSize = true;
-            this.SafeRange_lbl.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.SafeRange_lbl.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.SafeRange_lbl.Location = new System.Drawing.Point(163, 29);
             this.SafeRange_lbl.Name = "SafeRange_lbl";
-            this.SafeRange_lbl.Size = new System.Drawing.Size(107, 76);
+            this.SafeRange_lbl.Size = new System.Drawing.Size(117, 84);
             this.SafeRange_lbl.TabIndex = 14;
             this.SafeRange_lbl.Text = "SafeRange\r\nX : 0~700\r\nY : -500~600\r\nZ : -130~500";
             // 
@@ -510,7 +531,7 @@
             this.PositionMove_gb.Controls.Add(this.XJ1Positive_btn);
             this.PositionMove_gb.Controls.Add(this.XJ1Negative_btn);
             this.PositionMove_gb.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.PositionMove_gb.Location = new System.Drawing.Point(745, 159);
+            this.PositionMove_gb.Location = new System.Drawing.Point(820, 159);
             this.PositionMove_gb.Name = "PositionMove_gb";
             this.PositionMove_gb.Size = new System.Drawing.Size(231, 278);
             this.PositionMove_gb.TabIndex = 10;
@@ -656,25 +677,6 @@
             this.XJ1Negative_btn.Text = "-X";
             this.XJ1Negative_btn.UseVisualStyleBackColor = true;
             this.XJ1Negative_btn.Click += new System.EventHandler(this.XJ1Negative_btn_Click);
-            // 
-            // Velocity_lbl
-            // 
-            this.Velocity_lbl.AutoSize = true;
-            this.Velocity_lbl.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.Velocity_lbl.Location = new System.Drawing.Point(163, 117);
-            this.Velocity_lbl.Name = "Velocity_lbl";
-            this.Velocity_lbl.Size = new System.Drawing.Size(122, 76);
-            this.Velocity_lbl.TabIndex = 15;
-            this.Velocity_lbl.Text = "Velocity\r\n輸入100~500\r\n(預設為100)\r\n         (mm/sec)";
-            // 
-            // Velocity_tb
-            // 
-            this.Velocity_tb.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.Velocity_tb.Font = new System.Drawing.Font("新細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.Velocity_tb.Location = new System.Drawing.Point(163, 175);
-            this.Velocity_tb.Name = "Velocity_tb";
-            this.Velocity_tb.Size = new System.Drawing.Size(47, 23);
-            this.Velocity_tb.TabIndex = 16;
             // 
             // Robot_Interface
             // 
