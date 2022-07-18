@@ -24,6 +24,9 @@ namespace Robot
         public string[][] PositionText;
         public Single[] xyzwpr = new Single[] { 0, 0, 0, 0, 0, 0, 0, 0, 0 };
         public Single[] joint = new Single[] { 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+        public string[] VelocityText;
+        public int VelocityRegister = 7;
+        public int VelocityValue = 0;
 
         public bool ConnectStatus_fg = false;
 
@@ -44,7 +47,7 @@ namespace Robot
             WJ4Set_tb.Text = "";
             PJ5Set_tb.Text = "";
             RJ6Set_tb.Text = "";
-            Velocity_tb.Text = "100";
+            VelocitySet_tb.Text = "";
             Joint_lbl.Text = "軸座標\r\nJ1 : \r\nJ2 : \r\nJ3 : \r\nJ4 : \r\nJ5 : \r\nJ6 : ";
             Override_lbl.Text = "";
             Register_lbl.Text = "R1   =\r\nR2   =";
@@ -70,7 +73,8 @@ namespace Robot
             WJ4Positive_btn.Text = "+W";
             PJ5Positive_btn.Text = "+P";
             RJ6Positive_btn.Text = "+R";
-            
+            Velocity_lbl.Text = "Velocity :";
+
             Alarm_gb.Enabled = true;
             CurrentPosition_gb.Enabled = true;
             Override_gb.Enabled = true;
@@ -78,7 +82,7 @@ namespace Robot
             PositionSet_gb.Enabled = true;
             PositionMove_gb.Enabled = true;
             timer1.Enabled = true;
-            
+
             fanuc.Refresh();
         }
 
@@ -100,7 +104,7 @@ namespace Robot
             WJ4Set_tb.Text = "";
             PJ5Set_tb.Text = "";
             RJ6Set_tb.Text = "";
-            Velocity_tb.Text = "";
+            VelocitySet_tb.Text = "";
             Joint_lbl.Text = "軸座標\r\nJ1 : \r\nJ2 : \r\nJ3 : \r\nJ4 : \r\nJ5 : \r\nJ6 : ";
             Override_lbl.Text = "";
             Register_lbl.Text = "R1   =\r\nR2   =";
@@ -113,7 +117,6 @@ namespace Robot
             WJ4Set_lbl.Text = "";
             PJ5Set_lbl.Text = "";
             RJ6Set_lbl.Text = "";
-
             PositionMove_cb.SelectedItem = null;
             XJ1Negative_btn.Text = "";
             YJ2Negative_btn.Text = "";
@@ -127,6 +130,8 @@ namespace Robot
             WJ4Positive_btn.Text = "";
             PJ5Positive_btn.Text = "";
             RJ6Positive_btn.Text = "";
+
+            Velocity_lbl.Text = "Velocity : ";
         }
 
         private void Connect_btn_Click(object sender, EventArgs e)
@@ -142,15 +147,16 @@ namespace Robot
                     ConnectStatus_fg = true;
                     Connect_btn.Text = "Disconnect";
                     Connect_lbl.Text = "Connecting";
-                    
+
                     xyzwpr[0] = 180;
                     xyzwpr[1] = 0;
                     xyzwpr[2] = 280;
                     xyzwpr[3] = 180;
                     xyzwpr[4] = 0;
                     xyzwpr[5] = 0;
+                    VelocityValue = 100;
                     fanuc.CPositionSet(xyzwpr);
-                    fanuc.RegisterSet(11, 100);
+                    fanuc.VelocitySet(VelocityRegister, VelocityValue);
                 }
                 else
                 {
@@ -182,7 +188,8 @@ namespace Robot
             Joint_lbl.Text = PositionText[0][1];
             Override_lbl.Text = fanuc.Override();
             Register_lbl.Text = fanuc.Register();
-            Velocity_lbl.Text = fanuc.Velocity();
+            VelocityText = fanuc.Velocity(VelocityRegister);
+            Velocity_lbl.Text = VelocityText[0];
         }
 
         private void RegisterSet_btn_Click(object sender, EventArgs e)
@@ -243,6 +250,7 @@ namespace Robot
                 WJ4Set_tb.Text = PositionText[1][3];
                 PJ5Set_tb.Text = PositionText[1][4];
                 RJ6Set_tb.Text = PositionText[1][5];
+                VelocitySet_tb.Text = VelocityText[1];
             }
             if ((string)PositionSet_cb.SelectedItem == "軸座標")
             {
@@ -252,6 +260,7 @@ namespace Robot
                 WJ4Set_tb.Text = PositionText[2][3];
                 PJ5Set_tb.Text = PositionText[2][4];
                 RJ6Set_tb.Text = PositionText[2][5];
+                VelocitySet_tb.Text = VelocityText[1];
             }
         }
 
@@ -262,7 +271,7 @@ namespace Robot
                 if (string.IsNullOrEmpty(XJ1Set_tb.Text) || string.IsNullOrEmpty(YJ2Set_tb.Text) ||
                     string.IsNullOrEmpty(ZJ3Set_tb.Text) || string.IsNullOrEmpty(WJ4Set_tb.Text) ||
                     string.IsNullOrEmpty(PJ5Set_tb.Text) || string.IsNullOrEmpty(RJ6Set_tb.Text) ||
-                    string.IsNullOrEmpty(Velocity_tb.Text))
+                    string.IsNullOrEmpty(VelocitySet_tb.Text))
                 {
                     MessageBox.Show("座標值和速度值不可有空白");
                 }
@@ -276,9 +285,26 @@ namespace Robot
                         xyzwpr[3] = Convert.ToSingle(WJ4Set_tb.Text);
                         xyzwpr[4] = Convert.ToSingle(PJ5Set_tb.Text);
                         xyzwpr[5] = Convert.ToSingle(RJ6Set_tb.Text);
+                        VelocityValue = Convert.ToInt32(VelocitySet_tb.Text);
 
-                        fanuc.CPositionSet(xyzwpr);
-                        fanuc.RegisterSet(11, Convert.ToSingle(Velocity_tb.Text));
+                        if (xyzwpr[0] >= 0 && xyzwpr[0] <= 700 && 
+                            xyzwpr[1] >= -500 && xyzwpr[1] <= 600 && 
+                            xyzwpr[2] >= -130 && xyzwpr[2] <= 500)
+                        {
+                            if (VelocityValue >= 100 && VelocityValue <= 500)
+                            {
+                                fanuc.VelocitySet(VelocityRegister, VelocityValue);
+                                fanuc.CPositionSet(xyzwpr);
+                            }
+                            else
+                            {
+                                MessageBox.Show("速度超出安全範圍");
+                            }
+                        }
+                        else
+                        {
+                            MessageBox.Show("座標超出安全範圍");
+                        }
                     }
 
                     if ((string)PositionSet_cb.SelectedItem == "軸座標")
@@ -289,9 +315,17 @@ namespace Robot
                         joint[3] = Convert.ToSingle(WJ4Set_tb.Text);
                         joint[4] = Convert.ToSingle(PJ5Set_tb.Text);
                         joint[5] = Convert.ToSingle(RJ6Set_tb.Text);
+                        VelocityValue = Convert.ToInt32(VelocitySet_tb.Text);
 
-                        fanuc.JPositionSet(joint);
-                        fanuc.RegisterSet(11, Convert.ToSingle(Velocity_tb.Text));
+                        if (VelocityValue >= 100 && VelocityValue <= 500)
+                        {
+                            fanuc.JPositionSet(joint);
+                            fanuc.VelocitySet(VelocityRegister, VelocityValue);
+                        }
+                        else
+                        {
+                            MessageBox.Show("速度超出安全範圍");
+                        }
                     }
                 }
             }
@@ -333,7 +367,7 @@ namespace Robot
 
         private void PositionSetKeyPressCheck(KeyPressEventArgs e)
         {
-            if (Char.IsNumber(e.KeyChar) || Char.IsControl(e.KeyChar) || e.KeyChar == (Char) 45 || e.KeyChar == (Char) 46)
+            if (Char.IsNumber(e.KeyChar) || Char.IsControl(e.KeyChar) || e.KeyChar == (Char)45 || e.KeyChar == (Char)46)
             {
                 e.Handled = false;
             }
@@ -342,7 +376,7 @@ namespace Robot
                 e.Handled = true;
             }
         }
-        
+
         private void PositionSet_cb_SelectedIndexChanged(object sender, EventArgs e)
         {
             if ((string)PositionSet_cb.SelectedItem == "卡式座標")
@@ -365,8 +399,8 @@ namespace Robot
                 RJ6Set_lbl.Text = "J6 :";
             }
         }
-
-        private void BackTotheInitialPosition_btn_Click(object sender, EventArgs e)
+        
+        private void BackTotheInitialStatus_btn_Click(object sender, EventArgs e)
         {
             xyzwpr[0] = 180;
             xyzwpr[1] = 0;
@@ -374,7 +408,9 @@ namespace Robot
             xyzwpr[3] = 180;
             xyzwpr[4] = 0;
             xyzwpr[5] = 0;
+            VelocityValue = 100;
 
+            fanuc.VelocitySet(VelocityRegister, VelocityValue);
             fanuc.CPositionSet(xyzwpr);
         }
 
@@ -473,7 +509,6 @@ namespace Robot
             fanuc.PositionMove(RJ6Negative_btn.Text);
         }
 
-        
     }
 
     //==============================class Fanuc==============================
@@ -515,20 +550,20 @@ namespace Robot
         private bool refresh_fg = false;
         public bool CurrentPosition_fg { get => currentPosition_fg; }
         private bool currentPosition_fg = false;
+        public bool CPositionSet_fg { get => cPositionSet_fg; }
+        private bool cPositionSet_fg = false;
+        public bool JPositionSet_fg { get => jPositionSet_fg; }
+        private bool jPositionSet_fg = false;
         public bool Overrider_fg { get => override_fg; }
         private bool override_fg = false;
         public bool Register_fg { get => register_fg; }
         private bool register_fg = false;
         public bool RegisterSet_fg { get => registerSet_fg; }
         private bool registerSet_fg = false;
-        public bool CPositionSet_fg { get => cPositionSet_fg; }
-        private bool cPositionSet_fg = false;
-        public bool JPositionSet_fg { get => jPositionSet_fg; }
-        private bool jPositionSet_fg = false;
         public bool PositionMove_fg { get => positionMove_fg; }
         private bool positionMove_fg = false;
 
-        
+
         public void Initalize()
         {
             mobjCore = new FRRJIf.Core();
@@ -553,7 +588,10 @@ namespace Robot
 
         public void Refresh()
         {
-            refresh_fg = mobjDataTable.Refresh();
+            if (!(refresh_fg = mobjDataTable.Refresh()))
+            {
+                MessageBox.Show("Refresh失敗");
+            }
         }
 
         public string Alarm()
@@ -682,40 +720,20 @@ namespace Robot
             short ValidC = 0;
             short ValidJ = 0;
 
-            if (xyzwpr[0] >= 0 && xyzwpr[0] <= 700)
+            if (currentPosition_fg = mobjCurPos.GetValue(ref Xyzwpr, ref Config, ref Joint, ref UF, ref UT, ref ValidC, ref ValidJ))
             {
-                if (xyzwpr[1] >= -500 && xyzwpr[1] <= 600)
-                {
-                    if (xyzwpr[2] >= -130 && xyzwpr[2] <= 500)
-                    {
-                        if (currentPosition_fg = mobjCurPos.GetValue(ref Xyzwpr, ref Config, ref Joint, ref UF, ref UT, ref ValidC, ref ValidJ))
-                        {
-                            int Index = 1;
+                int Index = 1;
 
-                            if (!(cPositionSet_fg = mobjPosReg.SetValueXyzwpr(Index, xyzwpr, Config, UF, UT)))
-                            {
-                                MessageBox.Show("卡式座標設定失敗");
-                            }
-                        }
-                        else
-                        {
-                            MessageBox.Show("取得目前卡式座標失敗");
-                        }
-                    }
-                    else
-                    {
-                        MessageBox.Show("Z座標超出安全範圍");
-                    }
-                }
-                else
+                if (!(cPositionSet_fg = mobjPosReg.SetValueXyzwpr(Index, xyzwpr, Config, UF, UT)))
                 {
-                    MessageBox.Show("Y座標超出安全範圍");
+                    MessageBox.Show("卡式座標設定失敗");
                 }
             }
             else
             {
-                MessageBox.Show("X座標超出安全範圍");
+                MessageBox.Show("取得目前卡式座標失敗");
             }
+
         }
 
         public void JPositionSet(Single[] joint)
@@ -787,23 +805,38 @@ namespace Robot
             return RegisterText;
         }
 
-        public string Velocity()
+        public string[] Velocity(int VelocityRegister)
         {
-            string VelocityText = "";
-            int Index = 11;
+            string[] VelocityText = { "", "" };
+            int index = VelocityRegister;
             object Value = null;
 
-            if (register_fg = mobjNumReg.GetValue(Index, ref Value))
+            if (register_fg = mobjNumReg.GetValue(index, ref Value))
             {
-                VelocityText = "R" + Index + "   =   " + Convert.ToString(Value);
+                VelocityText[0] = "Velocity : " + Convert.ToString(Value);
+                VelocityText[1] = Convert.ToString(Value);
             }
+            else
+            {
+                VelocityText[0] = "Velocity : Error";
+                VelocityText[1] = "Error";
+            }
+            return VelocityText;
         }
 
         public void RegisterSet(int Index, Single Value)
         {
             if (!(registerSet_fg = mobjNumReg.SetValue(Index, Value)))
             {
-                MessageBox.Show("R{0}設定失敗", Index.ToString());
+                MessageBox.Show("R" + Index.ToString() + "設定失敗");
+            }
+        }
+
+        public void VelocitySet(int Index, Single Value)
+        {
+            if (!(registerSet_fg = mobjNumReg.SetValue(Index, Value)))
+            {
+                MessageBox.Show("R" + Index.ToString() + "(速度)設定失敗");
             }
         }
 
@@ -1017,7 +1050,7 @@ namespace Robot
                         break;
                 }
 
-                
+
             }
             else
             {

@@ -49,10 +49,11 @@
             this.Override_gb = new System.Windows.Forms.GroupBox();
             this.Override_lbl = new System.Windows.Forms.Label();
             this.PositionSet_gb = new System.Windows.Forms.GroupBox();
-            this.Velocity_tb = new System.Windows.Forms.TextBox();
+            this.VelocityRange_lbl = new System.Windows.Forms.Label();
+            this.VelocitySet_tb = new System.Windows.Forms.TextBox();
             this.Velocity_lbl = new System.Windows.Forms.Label();
             this.PositionSet_cb = new System.Windows.Forms.ComboBox();
-            this.BackTotheInitialPosition_btn = new System.Windows.Forms.Button();
+            this.BackTotheInitialStatus_btn = new System.Windows.Forms.Button();
             this.SafeRange_lbl = new System.Windows.Forms.Label();
             this.GetNowPosition_btn = new System.Windows.Forms.Button();
             this.SetPosition_btn = new System.Windows.Forms.Button();
@@ -167,7 +168,7 @@
             this.CurrentPosition_gb.Controls.Add(this.Joint_lbl);
             this.CurrentPosition_gb.Controls.Add(this.Xyzwpr_lbl);
             this.CurrentPosition_gb.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.CurrentPosition_gb.Location = new System.Drawing.Point(12, 159);
+            this.CurrentPosition_gb.Location = new System.Drawing.Point(548, 253);
             this.CurrentPosition_gb.Name = "CurrentPosition_gb";
             this.CurrentPosition_gb.Size = new System.Drawing.Size(302, 184);
             this.CurrentPosition_gb.TabIndex = 5;
@@ -201,9 +202,9 @@
             this.Register_gb.Controls.Add(this.R1Set_lbl);
             this.Register_gb.Controls.Add(this.Register_lbl);
             this.Register_gb.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.Register_gb.Location = new System.Drawing.Point(677, 159);
+            this.Register_gb.Location = new System.Drawing.Point(703, 12);
             this.Register_gb.Name = "Register_gb";
-            this.Register_gb.Size = new System.Drawing.Size(126, 184);
+            this.Register_gb.Size = new System.Drawing.Size(147, 238);
             this.Register_gb.TabIndex = 6;
             this.Register_gb.TabStop = false;
             this.Register_gb.Text = "Register";
@@ -213,7 +214,7 @@
             this.RegisterSet_btn.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.RegisterSet_btn.Location = new System.Drawing.Point(11, 143);
             this.RegisterSet_btn.Name = "RegisterSet_btn";
-            this.RegisterSet_btn.Size = new System.Drawing.Size(101, 35);
+            this.RegisterSet_btn.Size = new System.Drawing.Size(101, 38);
             this.RegisterSet_btn.TabIndex = 5;
             this.RegisterSet_btn.Text = "Register Set";
             this.RegisterSet_btn.UseVisualStyleBackColor = true;
@@ -270,9 +271,9 @@
             // 
             this.Override_gb.Controls.Add(this.Override_lbl);
             this.Override_gb.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.Override_gb.Location = new System.Drawing.Point(703, 12);
+            this.Override_gb.Location = new System.Drawing.Point(548, 159);
             this.Override_gb.Name = "Override_gb";
-            this.Override_gb.Size = new System.Drawing.Size(100, 76);
+            this.Override_gb.Size = new System.Drawing.Size(149, 91);
             this.Override_gb.TabIndex = 7;
             this.Override_gb.TabStop = false;
             this.Override_gb.Text = "Override";
@@ -288,10 +289,11 @@
             // 
             // PositionSet_gb
             // 
-            this.PositionSet_gb.Controls.Add(this.Velocity_tb);
+            this.PositionSet_gb.Controls.Add(this.VelocityRange_lbl);
+            this.PositionSet_gb.Controls.Add(this.VelocitySet_tb);
             this.PositionSet_gb.Controls.Add(this.Velocity_lbl);
             this.PositionSet_gb.Controls.Add(this.PositionSet_cb);
-            this.PositionSet_gb.Controls.Add(this.BackTotheInitialPosition_btn);
+            this.PositionSet_gb.Controls.Add(this.BackTotheInitialStatus_btn);
             this.PositionSet_gb.Controls.Add(this.SafeRange_lbl);
             this.PositionSet_gb.Controls.Add(this.GetNowPosition_btn);
             this.PositionSet_gb.Controls.Add(this.SetPosition_btn);
@@ -308,33 +310,43 @@
             this.PositionSet_gb.Controls.Add(this.YJ2Set_lbl);
             this.PositionSet_gb.Controls.Add(this.XJ1Set_lbl);
             this.PositionSet_gb.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.PositionSet_gb.Location = new System.Drawing.Point(320, 159);
+            this.PositionSet_gb.Location = new System.Drawing.Point(249, 159);
             this.PositionSet_gb.Name = "PositionSet_gb";
             this.PositionSet_gb.Size = new System.Drawing.Size(293, 278);
             this.PositionSet_gb.TabIndex = 8;
             this.PositionSet_gb.TabStop = false;
             this.PositionSet_gb.Text = "Position Set";
             // 
-            // Velocity_tb
+            // VelocityRange_lbl
             // 
-            this.Velocity_tb.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.Velocity_tb.Font = new System.Drawing.Font("新細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.Velocity_tb.Location = new System.Drawing.Point(163, 204);
-            this.Velocity_tb.Name = "Velocity_tb";
-            this.Velocity_tb.Size = new System.Drawing.Size(123, 23);
-            this.Velocity_tb.TabIndex = 16;
-            this.Velocity_tb.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.Velocity_tb.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.Velocity_tb_KeyPress);
+            this.VelocityRange_lbl.AutoSize = true;
+            this.VelocityRange_lbl.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.VelocityRange_lbl.Location = new System.Drawing.Point(163, 142);
+            this.VelocityRange_lbl.Name = "VelocityRange_lbl";
+            this.VelocityRange_lbl.Size = new System.Drawing.Size(124, 57);
+            this.VelocityRange_lbl.TabIndex = 17;
+            this.VelocityRange_lbl.Text = "輸入100~500\r\n(預設值為100)\r\n   (mm/sec)↓";
+            // 
+            // VelocitySet_tb
+            // 
+            this.VelocitySet_tb.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.VelocitySet_tb.Font = new System.Drawing.Font("新細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.VelocitySet_tb.Location = new System.Drawing.Point(163, 204);
+            this.VelocitySet_tb.Name = "VelocitySet_tb";
+            this.VelocitySet_tb.Size = new System.Drawing.Size(123, 23);
+            this.VelocitySet_tb.TabIndex = 16;
+            this.VelocitySet_tb.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.VelocitySet_tb.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.Velocity_tb_KeyPress);
             // 
             // Velocity_lbl
             // 
             this.Velocity_lbl.AutoSize = true;
-            this.Velocity_lbl.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.Velocity_lbl.Location = new System.Drawing.Point(163, 117);
+            this.Velocity_lbl.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.Velocity_lbl.Location = new System.Drawing.Point(163, 119);
             this.Velocity_lbl.Name = "Velocity_lbl";
-            this.Velocity_lbl.Size = new System.Drawing.Size(123, 84);
+            this.Velocity_lbl.Size = new System.Drawing.Size(81, 19);
             this.Velocity_lbl.TabIndex = 15;
-            this.Velocity_lbl.Text = "Velocity :\r\n輸入100~500\r\n(預設為100)\r\n  (mm/sec)↓";
+            this.Velocity_lbl.Text = "Velocity :";
             // 
             // PositionSet_cb
             // 
@@ -351,17 +363,17 @@
             this.PositionSet_cb.TabIndex = 11;
             this.PositionSet_cb.SelectedIndexChanged += new System.EventHandler(this.PositionSet_cb_SelectedIndexChanged);
             // 
-            // BackTotheInitialPosition_btn
+            // BackTotheInitialStatus_btn
             // 
-            this.BackTotheInitialPosition_btn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.BackTotheInitialPosition_btn.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.BackTotheInitialPosition_btn.Location = new System.Drawing.Point(163, 233);
-            this.BackTotheInitialPosition_btn.Name = "BackTotheInitialPosition_btn";
-            this.BackTotheInitialPosition_btn.Size = new System.Drawing.Size(123, 40);
-            this.BackTotheInitialPosition_btn.TabIndex = 10;
-            this.BackTotheInitialPosition_btn.Text = "Back To The Initial Position";
-            this.BackTotheInitialPosition_btn.UseVisualStyleBackColor = true;
-            this.BackTotheInitialPosition_btn.Click += new System.EventHandler(this.BackTotheInitialPosition_btn_Click);
+            this.BackTotheInitialStatus_btn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.BackTotheInitialStatus_btn.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.BackTotheInitialStatus_btn.Location = new System.Drawing.Point(163, 233);
+            this.BackTotheInitialStatus_btn.Name = "BackTotheInitialStatus_btn";
+            this.BackTotheInitialStatus_btn.Size = new System.Drawing.Size(123, 40);
+            this.BackTotheInitialStatus_btn.TabIndex = 10;
+            this.BackTotheInitialStatus_btn.Text = "Back To The Initial Status";
+            this.BackTotheInitialStatus_btn.UseVisualStyleBackColor = true;
+            this.BackTotheInitialStatus_btn.Click += new System.EventHandler(this.BackTotheInitialStatus_btn_Click);
             // 
             // SafeRange_lbl
             // 
@@ -531,7 +543,7 @@
             this.PositionMove_gb.Controls.Add(this.XJ1Positive_btn);
             this.PositionMove_gb.Controls.Add(this.XJ1Negative_btn);
             this.PositionMove_gb.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.PositionMove_gb.Location = new System.Drawing.Point(820, 159);
+            this.PositionMove_gb.Location = new System.Drawing.Point(12, 159);
             this.PositionMove_gb.Name = "PositionMove_gb";
             this.PositionMove_gb.Size = new System.Drawing.Size(231, 278);
             this.PositionMove_gb.TabIndex = 10;
@@ -682,10 +694,10 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1063, 582);
+            this.ClientSize = new System.Drawing.Size(858, 456);
             this.Controls.Add(this.PositionMove_gb);
-            this.Controls.Add(this.Register_gb);
             this.Controls.Add(this.PositionSet_gb);
+            this.Controls.Add(this.Register_gb);
             this.Controls.Add(this.Override_gb);
             this.Controls.Add(this.CurrentPosition_gb);
             this.Controls.Add(this.Alarm_gb);
@@ -747,7 +759,7 @@
         private System.Windows.Forms.TextBox ZJ3Set_tb;
         private System.Windows.Forms.TextBox YJ2Set_tb;
         private System.Windows.Forms.Label SafeRange_lbl;
-        private System.Windows.Forms.Button BackTotheInitialPosition_btn;
+        private System.Windows.Forms.Button BackTotheInitialStatus_btn;
         private System.Windows.Forms.GroupBox PositionMove_gb;
         private System.Windows.Forms.ComboBox PositionSet_cb;
         private System.Windows.Forms.ComboBox PositionMove_cb;
@@ -764,7 +776,8 @@
         private System.Windows.Forms.Button YJ2Positive_btn;
         private System.Windows.Forms.Button YJ2Negative_btn;
         private System.Windows.Forms.Label Velocity_lbl;
-        private System.Windows.Forms.TextBox Velocity_tb;
+        private System.Windows.Forms.TextBox VelocitySet_tb;
+        private System.Windows.Forms.Label VelocityRange_lbl;
     }
 }
 
