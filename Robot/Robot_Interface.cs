@@ -1,7 +1,4 @@
-﻿
-
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -516,54 +513,13 @@ namespace Robot
     {
         private FRRJIf.Core mobjCore;
         private FRRJIf.DataTable mobjDataTable;
-        private FRRJIf.DataTable mobjDataTable2;
         private FRRJIf.DataCurPos mobjCurPos;
-        private FRRJIf.DataCurPos mobjCurPosUF;
-        private FRRJIf.DataCurPos mobjCurPos2;
         private FRRJIf.DataTask mobjTask;
-        private FRRJIf.DataTask mobjTaskIgnoreMacro;
-        private FRRJIf.DataTask mobjTaskIgnoreKarel;
-        private FRRJIf.DataTask mobjTaskIgnoreMacroKarel;
         private FRRJIf.DataPosReg mobjPosReg;
-        private FRRJIf.DataPosReg mobjPosReg2;
-        private FRRJIf.DataPosRegXyzwpr mobjPosRegXyzwpr;
-        private FRRJIf.DataPosRegMG mobjPosRegMG;
         private FRRJIf.DataSysVar mobjSysVarInt;
-        private FRRJIf.DataSysVar mobjSysVarInt2;
-        private FRRJIf.DataSysVar mobjSysVarReal;
-        private FRRJIf.DataSysVar mobjSysVarReal2;
-        private FRRJIf.DataSysVar mobjSysVarString;
-        private FRRJIf.DataSysVarPos mobjSysVarPos;
-        private FRRJIf.DataSysVar[] mobjSysVarIntArray;
         private FRRJIf.DataNumReg mobjNumReg;
-        private FRRJIf.DataNumReg mobjNumReg2;
-        private FRRJIf.DataNumReg mobjNumReg3;
-        private FRRJIf.DataAlarm mobjAlarm;
         private FRRJIf.DataAlarm mobjAlarmCurrent;
-        private FRRJIf.DataSysVar mobjVarString;
-        private FRRJIf.DataString mobjStrReg;
-        private FRRJIf.DataString mobjStrRegComment;
-
-        public bool Alarm_fg { get => alarm_fg; }
-        private bool alarm_fg = false;
-        public bool Refresh_fg { get => refresh_fg; }
-        private bool refresh_fg = false;
-        public bool CurrentPosition_fg { get => currentPosition_fg; }
-        private bool currentPosition_fg = false;
-        public bool CPositionSet_fg { get => cPositionSet_fg; }
-        private bool cPositionSet_fg = false;
-        public bool JPositionSet_fg { get => jPositionSet_fg; }
-        private bool jPositionSet_fg = false;
-        public bool Overrider_fg { get => override_fg; }
-        private bool override_fg = false;
-        public bool Register_fg { get => register_fg; }
-        private bool register_fg = false;
-        public bool RegisterSet_fg { get => registerSet_fg; }
-        private bool registerSet_fg = false;
-        public bool PositionMove_fg { get => positionMove_fg; }
-        private bool positionMove_fg = false;
-
-
+        
         public void Initalize()
         {
             mobjCore = new FRRJIf.Core();
@@ -572,7 +528,7 @@ namespace Robot
             mobjCurPos = mobjDataTable.AddCurPos(FRRJIf.FRIF_DATA_TYPE.CURPOS, 1);
             mobjTask = mobjDataTable.AddTask(FRRJIf.FRIF_DATA_TYPE.TASK, 1);
             mobjPosReg = mobjDataTable.AddPosReg(FRRJIf.FRIF_DATA_TYPE.POSREG, 1, 1, 10);
-            mobjSysVarInt = mobjDataTable.AddSysVar(FRRJIf.FRIF_DATA_TYPE.SYSVAR_INT, "$MCR.$GENOVERRIDE");
+            mobjSysVarInt = mobjDataTable.AddSysVar(FRRJIf.FRIF_DATA_TYPE.SYSVAR_INT, "$MCR.$GENOVERRIDE");  
             mobjNumReg = mobjDataTable.AddNumReg(FRRJIf.FRIF_DATA_TYPE.NUMREG_REAL, 1, 10);
         }
 
@@ -588,7 +544,7 @@ namespace Robot
 
         public void Refresh()
         {
-            if (!(refresh_fg = mobjDataTable.Refresh()))
+            if (!(mobjDataTable.Refresh()))
             {
                 MessageBox.Show("Refresh失敗");
             }
@@ -613,7 +569,7 @@ namespace Robot
             string CauseAlarmMessage = "";
             string SeverityMessage = "";
 
-            if (alarm_fg = mobjAlarmCurrent.GetValue(Count, ref AlarmID, ref AlarmNumber, ref CauseAlarmID, ref CauseAlarmNumber, ref Severity,
+            if (mobjAlarmCurrent.GetValue(Count, ref AlarmID, ref AlarmNumber, ref CauseAlarmID, ref CauseAlarmNumber, ref Severity,
                 ref Year, ref Month, ref Day, ref Hour, ref Minute, ref Second, ref AlarmMessage, ref CauseAlarmMessage, ref SeverityMessage))
             {
                 AlarmText = AlarmID + ", " + AlarmNumber + ", " + CauseAlarmID + ", " + CauseAlarmNumber + ", " + Severity + "\r\n" +
@@ -653,7 +609,7 @@ namespace Robot
             short ValidC = 0;
             short ValidJ = 0;
 
-            if (currentPosition_fg = mobjCurPos.GetValue(ref Xyzwpr, ref Config, ref Joint, ref UF, ref UT, ref ValidC, ref ValidJ))
+            if (mobjCurPos.GetValue(ref Xyzwpr, ref Config, ref Joint, ref UF, ref UT, ref ValidC, ref ValidJ))
             {
                 CurrentPositionText[0] = "卡式座標\r\n" +
                     "X : " + String.Format("{0,10}", Convert.ToSingle(Xyzwpr.GetValue(0)).ToString("###0.000")) + "\r\n" +
@@ -720,11 +676,11 @@ namespace Robot
             short ValidC = 0;
             short ValidJ = 0;
 
-            if (currentPosition_fg = mobjCurPos.GetValue(ref Xyzwpr, ref Config, ref Joint, ref UF, ref UT, ref ValidC, ref ValidJ))
+            if (mobjCurPos.GetValue(ref Xyzwpr, ref Config, ref Joint, ref UF, ref UT, ref ValidC, ref ValidJ))
             {
                 int Index = 1;
 
-                if (!(cPositionSet_fg = mobjPosReg.SetValueXyzwpr(Index, xyzwpr, Config, UF, UT)))
+                if (!(mobjPosReg.SetValueXyzwpr(Index, xyzwpr, Config, UF, UT)))
                 {
                     MessageBox.Show("卡式座標設定失敗");
                 }
@@ -746,11 +702,11 @@ namespace Robot
             short ValidC = 0;
             short ValidJ = 0;
 
-            if (currentPosition_fg = mobjCurPos.GetValue(ref Xyzwpr, ref Config, ref Joint, ref UF, ref UT, ref ValidC, ref ValidJ))
+            if (mobjCurPos.GetValue(ref Xyzwpr, ref Config, ref Joint, ref UF, ref UT, ref ValidC, ref ValidJ))
             {
                 int Index = 1;
 
-                if (!(cPositionSet_fg = mobjPosReg.SetValueJoint(Index, joint, UF, UT)))
+                if (!(mobjPosReg.SetValueJoint(Index, joint, UF, UT)))
                 {
                     MessageBox.Show("軸座標設定失敗");
                 }
@@ -766,7 +722,7 @@ namespace Robot
             string OverrideText = "";
             object Value = null;
 
-            if (override_fg = mobjSysVarInt.GetValue(ref Value))
+            if (mobjSysVarInt.GetValue(ref Value))
             {
                 OverrideText = Convert.ToString(Value) + "%";
             }
@@ -785,7 +741,7 @@ namespace Robot
 
             for (Index = 1; Index <= 2; Index++)
             {
-                if (register_fg = mobjNumReg.GetValue(Index, ref Value))
+                if (mobjNumReg.GetValue(Index, ref Value))
                 {
                     if (Index == 1)
                     {
@@ -811,7 +767,7 @@ namespace Robot
             int index = VelocityRegister;
             object Value = null;
 
-            if (register_fg = mobjNumReg.GetValue(index, ref Value))
+            if (mobjNumReg.GetValue(index, ref Value))
             {
                 VelocityText[0] = "Velocity : " + Convert.ToString(Value);
                 VelocityText[1] = Convert.ToString(Value);
@@ -826,7 +782,7 @@ namespace Robot
 
         public void RegisterSet(int Index, Single Value)
         {
-            if (!(registerSet_fg = mobjNumReg.SetValue(Index, Value)))
+            if (!(mobjNumReg.SetValue(Index, Value)))
             {
                 MessageBox.Show("R" + Index.ToString() + "設定失敗");
             }
@@ -834,7 +790,7 @@ namespace Robot
 
         public void VelocitySet(int Index, Single Value)
         {
-            if (!(registerSet_fg = mobjNumReg.SetValue(Index, Value)))
+            if (!(mobjNumReg.SetValue(Index, Value)))
             {
                 MessageBox.Show("R" + Index.ToString() + "(速度)設定失敗");
             }
@@ -850,7 +806,7 @@ namespace Robot
             short ValidC = 0;
             short ValidJ = 0;
 
-            if (currentPosition_fg = mobjCurPos.GetValue(ref Xyzwpr, ref Config, ref Joint, ref UF, ref UT, ref ValidC, ref ValidJ))
+            if (mobjCurPos.GetValue(ref Xyzwpr, ref Config, ref Joint, ref UF, ref UT, ref ValidC, ref ValidJ))
             {
                 int Index = 1;
 
@@ -859,7 +815,7 @@ namespace Robot
                 {
                     case "+X":
                         Xyzwpr.SetValue(Convert.ToSingle(Xyzwpr.GetValue(0)) + 5, 0);
-                        if (!(cPositionSet_fg = mobjPosReg.SetValueXyzwpr(Index, Xyzwpr, Config, UF, UT)))
+                        if (!(mobjPosReg.SetValueXyzwpr(Index, Xyzwpr, Config, UF, UT)))
                         {
                             MessageBox.Show("軸座標設定失敗");
                         }
@@ -867,7 +823,7 @@ namespace Robot
 
                     case "-X":
                         Xyzwpr.SetValue(Convert.ToSingle(Xyzwpr.GetValue(0)) - 5, 0);
-                        if (!(cPositionSet_fg = mobjPosReg.SetValueXyzwpr(Index, Xyzwpr, Config, UF, UT)))
+                        if (!(mobjPosReg.SetValueXyzwpr(Index, Xyzwpr, Config, UF, UT)))
                         {
                             MessageBox.Show("軸座標設定失敗");
                         }
@@ -875,7 +831,7 @@ namespace Robot
 
                     case "+Y":
                         Xyzwpr.SetValue(Convert.ToSingle(Xyzwpr.GetValue(1)) + 5, 1);
-                        if (!(cPositionSet_fg = mobjPosReg.SetValueXyzwpr(Index, Xyzwpr, Config, UF, UT)))
+                        if (!(mobjPosReg.SetValueXyzwpr(Index, Xyzwpr, Config, UF, UT)))
                         {
                             MessageBox.Show("軸座標設定失敗");
                         }
@@ -883,7 +839,7 @@ namespace Robot
 
                     case "-Y":
                         Xyzwpr.SetValue(Convert.ToSingle(Xyzwpr.GetValue(1)) - 5, 1);
-                        if (!(cPositionSet_fg = mobjPosReg.SetValueXyzwpr(Index, Xyzwpr, Config, UF, UT)))
+                        if (!(mobjPosReg.SetValueXyzwpr(Index, Xyzwpr, Config, UF, UT)))
                         {
                             MessageBox.Show("軸座標設定失敗");
                         }
@@ -891,7 +847,7 @@ namespace Robot
 
                     case "+Z":
                         Xyzwpr.SetValue(Convert.ToSingle(Xyzwpr.GetValue(2)) + 5, 2);
-                        if (!(cPositionSet_fg = mobjPosReg.SetValueXyzwpr(Index, Xyzwpr, Config, UF, UT)))
+                        if (!(mobjPosReg.SetValueXyzwpr(Index, Xyzwpr, Config, UF, UT)))
                         {
                             MessageBox.Show("軸座標設定失敗");
                         }
@@ -899,7 +855,7 @@ namespace Robot
 
                     case "-Z":
                         Xyzwpr.SetValue(Convert.ToSingle(Xyzwpr.GetValue(2)) - 5, 2);
-                        if (!(cPositionSet_fg = mobjPosReg.SetValueXyzwpr(Index, Xyzwpr, Config, UF, UT)))
+                        if (!(mobjPosReg.SetValueXyzwpr(Index, Xyzwpr, Config, UF, UT)))
                         {
                             MessageBox.Show("軸座標設定失敗");
                         }
@@ -907,7 +863,7 @@ namespace Robot
 
                     case "+W":
                         Xyzwpr.SetValue(Convert.ToSingle(Xyzwpr.GetValue(3)) + 5, 3);
-                        if (!(cPositionSet_fg = mobjPosReg.SetValueXyzwpr(Index, Xyzwpr, Config, UF, UT)))
+                        if (!(mobjPosReg.SetValueXyzwpr(Index, Xyzwpr, Config, UF, UT)))
                         {
                             MessageBox.Show("軸座標設定失敗");
                         }
@@ -915,7 +871,7 @@ namespace Robot
 
                     case "-W":
                         Xyzwpr.SetValue(Convert.ToSingle(Xyzwpr.GetValue(3)) - 5, 3);
-                        if (!(cPositionSet_fg = mobjPosReg.SetValueXyzwpr(Index, Xyzwpr, Config, UF, UT)))
+                        if (!(mobjPosReg.SetValueXyzwpr(Index, Xyzwpr, Config, UF, UT)))
                         {
                             MessageBox.Show("軸座標設定失敗");
                         }
@@ -923,7 +879,7 @@ namespace Robot
 
                     case "+P":
                         Xyzwpr.SetValue(Convert.ToSingle(Xyzwpr.GetValue(4)) + 5, 4);
-                        if (!(cPositionSet_fg = mobjPosReg.SetValueXyzwpr(Index, Xyzwpr, Config, UF, UT)))
+                        if (!(mobjPosReg.SetValueXyzwpr(Index, Xyzwpr, Config, UF, UT)))
                         {
                             MessageBox.Show("軸座標設定失敗");
                         }
@@ -931,7 +887,7 @@ namespace Robot
 
                     case "-P":
                         Xyzwpr.SetValue(Convert.ToSingle(Xyzwpr.GetValue(4)) - 5, 4);
-                        if (!(cPositionSet_fg = mobjPosReg.SetValueXyzwpr(Index, Xyzwpr, Config, UF, UT)))
+                        if (!(mobjPosReg.SetValueXyzwpr(Index, Xyzwpr, Config, UF, UT)))
                         {
                             MessageBox.Show("軸座標設定失敗");
                         }
@@ -939,7 +895,7 @@ namespace Robot
 
                     case "+R":
                         Xyzwpr.SetValue(Convert.ToSingle(Xyzwpr.GetValue(5)) + 5, 5);
-                        if (!(cPositionSet_fg = mobjPosReg.SetValueXyzwpr(Index, Xyzwpr, Config, UF, UT)))
+                        if (!(mobjPosReg.SetValueXyzwpr(Index, Xyzwpr, Config, UF, UT)))
                         {
                             MessageBox.Show("軸座標設定失敗");
                         }
@@ -947,7 +903,7 @@ namespace Robot
 
                     case "-R":
                         Xyzwpr.SetValue(Convert.ToSingle(Xyzwpr.GetValue(5)) - 5, 5);
-                        if (!(cPositionSet_fg = mobjPosReg.SetValueXyzwpr(Index, Xyzwpr, Config, UF, UT)))
+                        if (!(mobjPosReg.SetValueXyzwpr(Index, Xyzwpr, Config, UF, UT)))
                         {
                             MessageBox.Show("軸座標設定失敗");
                         }
@@ -955,7 +911,7 @@ namespace Robot
 
                     case "+J1":
                         Joint.SetValue(Convert.ToSingle(Joint.GetValue(0)) + 5, 0);
-                        if (!(jPositionSet_fg = mobjPosReg.SetValueJoint(Index, Joint, UF, UT)))
+                        if (!(mobjPosReg.SetValueJoint(Index, Joint, UF, UT)))
                         {
                             MessageBox.Show("軸座標設定失敗");
                         }
@@ -963,7 +919,7 @@ namespace Robot
 
                     case "-J1":
                         Joint.SetValue(Convert.ToSingle(Joint.GetValue(0)) - 5, 0);
-                        if (!(jPositionSet_fg = mobjPosReg.SetValueJoint(Index, Joint, UF, UT)))
+                        if (!(mobjPosReg.SetValueJoint(Index, Joint, UF, UT)))
                         {
                             MessageBox.Show("軸座標設定失敗");
                         }
@@ -971,7 +927,7 @@ namespace Robot
 
                     case "+J2":
                         Joint.SetValue(Convert.ToSingle(Joint.GetValue(1)) + 5, 1);
-                        if (!(jPositionSet_fg = mobjPosReg.SetValueJoint(Index, Joint, UF, UT)))
+                        if (!(mobjPosReg.SetValueJoint(Index, Joint, UF, UT)))
                         {
                             MessageBox.Show("軸座標設定失敗");
                         }
@@ -979,7 +935,7 @@ namespace Robot
 
                     case "-J2":
                         Joint.SetValue(Convert.ToSingle(Joint.GetValue(1)) - 5, 1);
-                        if (!(jPositionSet_fg = mobjPosReg.SetValueJoint(Index, Joint, UF, UT)))
+                        if (!(mobjPosReg.SetValueJoint(Index, Joint, UF, UT)))
                         {
                             MessageBox.Show("軸座標設定失敗");
                         }
@@ -987,7 +943,7 @@ namespace Robot
 
                     case "+J3":
                         Joint.SetValue(Convert.ToSingle(Joint.GetValue(2)) + 5, 2);
-                        if (!(jPositionSet_fg = mobjPosReg.SetValueJoint(Index, Joint, UF, UT)))
+                        if (!(mobjPosReg.SetValueJoint(Index, Joint, UF, UT)))
                         {
                             MessageBox.Show("軸座標設定失敗");
                         }
@@ -995,7 +951,7 @@ namespace Robot
 
                     case "-J3":
                         Joint.SetValue(Convert.ToSingle(Joint.GetValue(2)) - 5, 2);
-                        if (!(jPositionSet_fg = mobjPosReg.SetValueJoint(Index, Joint, UF, UT)))
+                        if (!(mobjPosReg.SetValueJoint(Index, Joint, UF, UT)))
                         {
                             MessageBox.Show("軸座標設定失敗");
                         }
@@ -1003,7 +959,7 @@ namespace Robot
 
                     case "+J4":
                         Joint.SetValue(Convert.ToSingle(Joint.GetValue(3)) + 5, 3);
-                        if (!(jPositionSet_fg = mobjPosReg.SetValueJoint(Index, Joint, UF, UT)))
+                        if (!(mobjPosReg.SetValueJoint(Index, Joint, UF, UT)))
                         {
                             MessageBox.Show("軸座標設定失敗");
                         }
@@ -1011,7 +967,7 @@ namespace Robot
 
                     case "-J4":
                         Joint.SetValue(Convert.ToSingle(Joint.GetValue(3)) - 5, 3);
-                        if (!(jPositionSet_fg = mobjPosReg.SetValueJoint(Index, Joint, UF, UT)))
+                        if (!(mobjPosReg.SetValueJoint(Index, Joint, UF, UT)))
                         {
                             MessageBox.Show("軸座標設定失敗");
                         }
@@ -1019,7 +975,7 @@ namespace Robot
 
                     case "+J5":
                         Joint.SetValue(Convert.ToSingle(Joint.GetValue(4)) + 5, 4);
-                        if (!(jPositionSet_fg = mobjPosReg.SetValueJoint(Index, Joint, UF, UT)))
+                        if (!(mobjPosReg.SetValueJoint(Index, Joint, UF, UT)))
                         {
                             MessageBox.Show("軸座標設定失敗");
                         }
@@ -1027,7 +983,7 @@ namespace Robot
 
                     case "-J5":
                         Joint.SetValue(Convert.ToSingle(Joint.GetValue(4)) - 5, 4);
-                        if (!(jPositionSet_fg = mobjPosReg.SetValueJoint(Index, Joint, UF, UT)))
+                        if (!(mobjPosReg.SetValueJoint(Index, Joint, UF, UT)))
                         {
                             MessageBox.Show("軸座標設定失敗");
                         }
@@ -1035,7 +991,7 @@ namespace Robot
 
                     case "+J6":
                         Joint.SetValue(Convert.ToSingle(Joint.GetValue(5)) + 5, 5);
-                        if (!(jPositionSet_fg = mobjPosReg.SetValueJoint(Index, Joint, UF, UT)))
+                        if (!(mobjPosReg.SetValueJoint(Index, Joint, UF, UT)))
                         {
                             MessageBox.Show("軸座標設定失敗");
                         }
@@ -1043,7 +999,7 @@ namespace Robot
 
                     case "-J6":
                         Joint.SetValue(Convert.ToSingle(Joint.GetValue(5)) - 5, 5);
-                        if (!(jPositionSet_fg = mobjPosReg.SetValueJoint(Index, Joint, UF, UT)))
+                        if (!(mobjPosReg.SetValueJoint(Index, Joint, UF, UT)))
                         {
                             MessageBox.Show("軸座標設定失敗");
                         }
