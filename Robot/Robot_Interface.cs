@@ -23,7 +23,7 @@ namespace Robot
         public Single[] joint = new Single[] { 0, 0, 0, 0, 0, 0, 0, 0, 0 };
         public string[] VelocityText;
         public int VelocityRegister = 7;
-        public int VelocityValue = 0;
+        public int VelocityValue = 100;
 
         public bool ConnectStatus_fg = false;
 
@@ -144,16 +144,9 @@ namespace Robot
                     ConnectStatus_fg = true;
                     Connect_btn.Text = "Disconnect";
                     Connect_lbl.Text = "Connecting";
-
-                    xyzwpr[0] = 180;
-                    xyzwpr[1] = 0;
-                    xyzwpr[2] = 280;
-                    xyzwpr[3] = 180;
-                    xyzwpr[4] = 0;
-                    xyzwpr[5] = 0;
-                    VelocityValue = 100;
-                    fanuc.CPositionSet(xyzwpr);
-                    fanuc.VelocitySet(VelocityRegister, VelocityValue);
+                    
+                    fanuc.CPositionSet();
+                    fanuc.VelocitySet(VelocityRegister);
                 }
                 else
                 {
@@ -692,6 +685,32 @@ namespace Robot
 
         }
 
+        public void CPositionSet()
+        {
+            Array Xyzwpr = new Single[9];
+            Array Config = new short[7];
+            Array Joint = new Single[9];
+            short UF = 0;
+            short UT = 0;
+            short ValidC = 0;
+            short ValidJ = 0;
+
+            if (mobjCurPos.GetValue(ref Xyzwpr, ref Config, ref Joint, ref UF, ref UT, ref ValidC, ref ValidJ))
+            {
+                int Index = 1;
+
+                if (!(mobjPosReg.SetValueXyzwpr(Index, Xyzwpr, Config, UF, UT)))
+                {
+                    MessageBox.Show("卡式座標設定失敗");
+                }
+            }
+            else
+            {
+                MessageBox.Show("取得目前卡式座標失敗");
+            }
+
+        }
+
         public void JPositionSet(Single[] joint)
         {
             Array Xyzwpr = new Single[9];
@@ -796,6 +815,23 @@ namespace Robot
             }
         }
 
+        public void VelocitySet(int Index)
+        {
+            object Value = null;
+
+            if (mobjNumReg.GetValue(Index, ref Value))
+            {
+                if (!(mobjNumReg.SetValue(Index, Value)))
+                {
+                    MessageBox.Show("R" + Index.ToString() + "(速度)設定失敗");
+                }
+            }
+            else
+            {
+                MessageBox.Show("R" + Index.ToString() + "(速度)取得失敗");
+            }
+        }
+        
         public void PositionMove(string Axis)
         {
             Array Xyzwpr = new Single[9];
