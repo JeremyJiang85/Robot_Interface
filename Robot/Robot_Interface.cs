@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Automation.BDaq;
 
 namespace Robot
 {
@@ -26,6 +27,10 @@ namespace Robot
         public int VelocityValue = 100;
 
         public bool ConnectStatus_fg = false;
+
+        byte portData = 0;
+        byte portDir = 0xFF;
+        ErrorCode err = ErrorCode.Success;
 
 
         public Robot_Interface()
@@ -92,6 +97,7 @@ namespace Robot
             Register_gb.Enabled = false;
             PositionSet_gb.Enabled = false;
             PositionMove_gb.Enabled = false;
+            P00_btn.Enabled = false;
 
             Alarm_lbl.Text = "";
             Xyzwpr_lbl.Text = "卡式座標\r\nX : \r\nY : \r\nZ : \r\nW: \r\nP : \r\nR : ";
@@ -499,6 +505,43 @@ namespace Robot
             fanuc.PositionMove(RJ6Negative_btn.Text);
         }
 
+        private void IOConnect_btn_Click(object sender, EventArgs e)
+        {
+            if (!instantDoCtrl1.Initialized)
+            {
+                MessageBox.Show("IO卡初始化失敗");
+                return;
+            }
+            err = instantDoCtrl1.ReadBit(0, 0, out portData);
+            if (err != ErrorCode.Success)
+            {
+                HandleError(err);
+                return;
+            }
+            Console.WriteLine(portData);
+
+            P00_btn.Enabled = true;
+        }
+
+        private void P00_btn_Click(object sender, EventArgs e)
+        {
+            portData = 1;
+            err = instantDoCtrl1.WriteBit(0, 0, (byte)(portData & 0x10));
+            if (err != ErrorCode.Success)
+            {
+                HandleError(err);
+                return;
+            }
+            Console.WriteLine(portData);
+        }
+
+        private void HandleError(ErrorCode err)
+        {
+            if ((err >= ErrorCode.ErrorHandleNotValid) && (err != ErrorCode.Success))
+            {
+                MessageBox.Show("Sorry ! Some errors happened, the error code is: " + err.ToString());
+            }
+        }
     }
 
     //==============================class Fanuc==============================
@@ -1050,4 +1093,19 @@ namespace Robot
             }
         }
     }
+
+    //==============================class IO==============================
+    //public class IO
+    //{
+    //    public void Initalize()
+    //    {
+    //    }
+
+    //    public bool Connect()
+    //    {
+    //        return instantDoCtrl1.Initialized;
+    //    }
+
+
+    //}
 }

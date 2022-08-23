@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Robot_Interface));
             this.HostName_tb = new System.Windows.Forms.TextBox();
             this.Connect_btn = new System.Windows.Forms.Button();
             this.Connect_gb = new System.Windows.Forms.GroupBox();
@@ -83,6 +84,10 @@
             this.PositionMove_cb = new System.Windows.Forms.ComboBox();
             this.XJ1Positive_btn = new System.Windows.Forms.Button();
             this.XJ1Negative_btn = new System.Windows.Forms.Button();
+            this.IO_gb = new System.Windows.Forms.GroupBox();
+            this.IOConnect_btn = new System.Windows.Forms.Button();
+            this.P00_btn = new System.Windows.Forms.Button();
+            this.instantDoCtrl1 = new Automation.BDaq.InstantDoCtrl(this.components);
             this.Connect_gb.SuspendLayout();
             this.Alarm_gb.SuspendLayout();
             this.CurrentPosition_gb.SuspendLayout();
@@ -90,6 +95,7 @@
             this.Override_gb.SuspendLayout();
             this.PositionSet_gb.SuspendLayout();
             this.PositionMove_gb.SuspendLayout();
+            this.IO_gb.SuspendLayout();
             this.SuspendLayout();
             // 
             // HostName_tb
@@ -690,11 +696,49 @@
             this.XJ1Negative_btn.UseVisualStyleBackColor = true;
             this.XJ1Negative_btn.Click += new System.EventHandler(this.XJ1Negative_btn_Click);
             // 
+            // IO_gb
+            // 
+            this.IO_gb.Controls.Add(this.IOConnect_btn);
+            this.IO_gb.Controls.Add(this.P00_btn);
+            this.IO_gb.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.IO_gb.Location = new System.Drawing.Point(12, 444);
+            this.IO_gb.Name = "IO_gb";
+            this.IO_gb.Size = new System.Drawing.Size(300, 97);
+            this.IO_gb.TabIndex = 11;
+            this.IO_gb.TabStop = false;
+            this.IO_gb.Text = "I/O";
+            // 
+            // IOConnect_btn
+            // 
+            this.IOConnect_btn.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.IOConnect_btn.Location = new System.Drawing.Point(6, 32);
+            this.IOConnect_btn.Name = "IOConnect_btn";
+            this.IOConnect_btn.Size = new System.Drawing.Size(110, 27);
+            this.IOConnect_btn.TabIndex = 1;
+            this.IOConnect_btn.Text = "Connect";
+            this.IOConnect_btn.UseVisualStyleBackColor = true;
+            this.IOConnect_btn.Click += new System.EventHandler(this.IOConnect_btn_Click);
+            // 
+            // P00_btn
+            // 
+            this.P00_btn.BackColor = System.Drawing.Color.Green;
+            this.P00_btn.Location = new System.Drawing.Point(126, 32);
+            this.P00_btn.Name = "P00_btn";
+            this.P00_btn.Size = new System.Drawing.Size(27, 27);
+            this.P00_btn.TabIndex = 0;
+            this.P00_btn.UseVisualStyleBackColor = false;
+            this.P00_btn.Click += new System.EventHandler(this.P00_btn_Click);
+            // 
+            // instantDoCtrl1
+            // 
+            this.instantDoCtrl1._StateStream = ((Automation.BDaq.DeviceStateStreamer)(resources.GetObject("instantDoCtrl1._StateStream")));
+            // 
             // Robot_Interface
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(864, 445);
+            this.ClientSize = new System.Drawing.Size(864, 562);
+            this.Controls.Add(this.IO_gb);
             this.Controls.Add(this.PositionMove_gb);
             this.Controls.Add(this.PositionSet_gb);
             this.Controls.Add(this.Register_gb);
@@ -718,6 +762,7 @@
             this.PositionSet_gb.ResumeLayout(false);
             this.PositionSet_gb.PerformLayout();
             this.PositionMove_gb.ResumeLayout(false);
+            this.IO_gb.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -778,6 +823,10 @@
         private System.Windows.Forms.Label Velocity_lbl;
         private System.Windows.Forms.TextBox VelocitySet_tb;
         private System.Windows.Forms.Label VelocityRange_lbl;
+        private System.Windows.Forms.GroupBox IO_gb;
+        private System.Windows.Forms.Button P00_btn;
+        private System.Windows.Forms.Button IOConnect_btn;
+        private Automation.BDaq.InstantDoCtrl instantDoCtrl1;
     }
 }
 
