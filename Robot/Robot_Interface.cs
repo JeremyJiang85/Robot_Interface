@@ -29,9 +29,10 @@ namespace Robot
         public bool ConnectStatus_fg = false;
 
         byte portData = 0;
-        byte portDir = 0xFF;
         ErrorCode err = ErrorCode.Success;
-
+        private Button[,] m_IObutton;
+        private int IOInitializeCount = 0;
+            
 
         public Robot_Interface()
         {
@@ -97,7 +98,8 @@ namespace Robot
             Register_gb.Enabled = false;
             PositionSet_gb.Enabled = false;
             PositionMove_gb.Enabled = false;
-            P00_btn.Enabled = false;
+            Output_pnl.Enabled = false;
+
 
             Alarm_lbl.Text = "";
             Xyzwpr_lbl.Text = "卡式座標\r\nX : \r\nY : \r\nZ : \r\nW: \r\nP : \r\nR : ";
@@ -135,6 +137,8 @@ namespace Robot
             RJ6Positive_btn.Text = "";
 
             Velocity_lbl.Text = "Velocity : ";
+
+            IOInitialize_lbl.Text = "Uninitialized";
         }
 
         private void Connect_btn_Click(object sender, EventArgs e)
@@ -505,34 +509,68 @@ namespace Robot
             fanuc.PositionMove(RJ6Negative_btn.Text);
         }
 
-        private void IOConnect_btn_Click(object sender, EventArgs e)
+        private void IOInitialize_btn_Click(object sender, EventArgs e)
         {
             if (!instantDoCtrl1.Initialized)
             {
                 MessageBox.Show("IO卡初始化失敗");
                 return;
             }
-            err = instantDoCtrl1.ReadBit(0, 0, out portData);
-            if (err != ErrorCode.Success)
+            
+            portData = 0;
+            IOInitialize_lbl.Text = "Initialized";
+            Output_pnl.Enabled = true;
+            Console.WriteLine(IOInitializeCount);
+            if (IOInitializeCount == 0)
             {
-                HandleError(err);
-                return;
+                m_IObutton = new Button[2, 8]{ { P00_btn, P01_btn, P02_btn, P03_btn, P04_btn, P05_btn, P06_btn, P07_btn},
+                                               { P10_btn, P11_btn, P12_btn, P13_btn, P14_btn, P15_btn, P16_btn, P17_btn} };
             }
-            Console.WriteLine(portData);
+            
+            for (int i = 0; i <= m_IObutton.GetLength(0)-1; i++)
+            {
+                err = instantDoCtrl1.Write(i, portData);
+                if (err != ErrorCode.Success)
+                {
+                    HandleError(err);
+                    return;
+                }
+                for (int j = 0; j <= m_IObutton.GetLength(1)-1; j++)
+                {
+                    if (IOInitializeCount == 0)
+                    {
+                        m_IObutton[i, j].Click += new EventHandler(Button_Click);
+                        m_IObutton[i, j].Tag = new DoBitInformation(i, j, portData);
+                    }
+                    m_IObutton[i, j].BackColor = Color.Green;
+                }
+            }
 
-            P00_btn.Enabled = true;
+            IOInitializeCount++;
         }
 
-        private void P00_btn_Click(object sender, EventArgs e)
+        private void Button_Click(object sender, EventArgs e)
         {
-            portData = 1;
-            err = instantDoCtrl1.WriteBit(0, 0, (byte)(portData & 0x10));
+            Button button = (Button)sender;
+            DoBitInformation buttonInformation = (DoBitInformation)button.Tag;
+            byte temp;
+            temp = (byte)(buttonInformation.BitValue ^ 0x01);
+            err = instantDoCtrl1.WriteBit(buttonInformation.PortNum, buttonInformation.BitNum, temp);
             if (err != ErrorCode.Success)
             {
                 HandleError(err);
                 return;
             }
-            Console.WriteLine(portData);
+            buttonInformation.BitValue = temp;
+            button.Tag = buttonInformation;
+            if (buttonInformation.BitValue == 1)
+            {
+                button.BackColor = Color.Red;
+            }
+            else
+            {
+                button.BackColor = Color.Green;
+            }
         }
 
         private void HandleError(ErrorCode err)
@@ -542,6 +580,8 @@ namespace Robot
                 MessageBox.Show("Sorry ! Some errors happened, the error code is: " + err.ToString());
             }
         }
+
+        
     }
 
     //==============================class Fanuc==============================
@@ -1095,17 +1135,66 @@ namespace Robot
     }
 
     //==============================class IO==============================
-    //public class IO
-    //{
-    //    public void Initalize()
-    //    {
-    //    }
+    public class DoBitInformation
+    {
+        private int m_portNum;
+        private int m_bitNum;
+        private byte m_bitValue;
 
-    //    public bool Connect()
-    //    {
-    //        return instantDoCtrl1.Initialized;
-    //    }
+        public DoBitInformation(int portNum, int bitNum, byte bitvalue)
+        {
+            m_portNum = portNum;
+            m_bitNum = bitNum;
+            m_bitValue = bitvalue;
+        }
 
+        public int PortNum
+        {
+            get { return m_portNum; }
+            set
+            {
+                if ((value - 0) >= 0
+                   && (value - 0) <= (2 - 1))
+                {
+                    m_portNum = value;
+                }
+                else
+                {
+                    MessageBox.Show("超出Port範圍");
+                }
+            }
+        }
 
-    //}
+        public int BitNum
+        {
+            get { return m_bitNum; }
+            set
+            {
+                if (value >= 0 && value <= 7)
+                {
+                    m_bitNum = value;
+                }
+                else
+                {
+                    MessageBox.Show("超出Bit範圍");
+                }
+            }
+        }
+
+        public byte BitValue
+        {
+            get { return m_bitValue; }
+            set
+            {
+                if (value == 0 || value == 1)
+                {
+                    m_bitValue = value;
+                }
+                else
+                {
+                    MessageBox.Show("超出BitValue範圍");
+                }
+            }
+        }
+    }
 }

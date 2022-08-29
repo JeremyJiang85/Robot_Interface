@@ -85,8 +85,37 @@
             this.XJ1Positive_btn = new System.Windows.Forms.Button();
             this.XJ1Negative_btn = new System.Windows.Forms.Button();
             this.IO_gb = new System.Windows.Forms.GroupBox();
-            this.IOConnect_btn = new System.Windows.Forms.Button();
+            this.Output_pnl = new System.Windows.Forms.Panel();
+            this.P07_btn = new System.Windows.Forms.Button();
+            this.label10 = new System.Windows.Forms.Label();
+            this.Bit_lbl = new System.Windows.Forms.Label();
+            this.P06_btn = new System.Windows.Forms.Button();
+            this.Bit0_lbl = new System.Windows.Forms.Label();
+            this.P05_btn = new System.Windows.Forms.Button();
+            this.Bit1_lbl = new System.Windows.Forms.Label();
+            this.P04_btn = new System.Windows.Forms.Button();
+            this.Bit2_lbl = new System.Windows.Forms.Label();
+            this.P03_btn = new System.Windows.Forms.Button();
+            this.Bit3_lbl = new System.Windows.Forms.Label();
+            this.P02_btn = new System.Windows.Forms.Button();
+            this.Bit4_lbl = new System.Windows.Forms.Label();
+            this.P01_btn = new System.Windows.Forms.Button();
+            this.Bit5_lbl = new System.Windows.Forms.Label();
             this.P00_btn = new System.Windows.Forms.Button();
+            this.P17_btn = new System.Windows.Forms.Button();
+            this.Bit6_lbl = new System.Windows.Forms.Label();
+            this.P16_btn = new System.Windows.Forms.Button();
+            this.Bit7_lbl = new System.Windows.Forms.Label();
+            this.P15_btn = new System.Windows.Forms.Button();
+            this.Port1_lbl = new System.Windows.Forms.Label();
+            this.P14_btn = new System.Windows.Forms.Button();
+            this.Port0_lbl = new System.Windows.Forms.Label();
+            this.P13_btn = new System.Windows.Forms.Button();
+            this.P12_btn = new System.Windows.Forms.Button();
+            this.P10_btn = new System.Windows.Forms.Button();
+            this.P11_btn = new System.Windows.Forms.Button();
+            this.IOInitialize_lbl = new System.Windows.Forms.Label();
+            this.IOInitialize_btn = new System.Windows.Forms.Button();
             this.instantDoCtrl1 = new Automation.BDaq.InstantDoCtrl(this.components);
             this.Connect_gb.SuspendLayout();
             this.Alarm_gb.SuspendLayout();
@@ -96,6 +125,7 @@
             this.PositionSet_gb.SuspendLayout();
             this.PositionMove_gb.SuspendLayout();
             this.IO_gb.SuspendLayout();
+            this.Output_pnl.SuspendLayout();
             this.SuspendLayout();
             // 
             // HostName_tb
@@ -141,9 +171,10 @@
             this.Connect_lbl.AutoSize = true;
             this.Connect_lbl.Location = new System.Drawing.Point(6, 29);
             this.Connect_lbl.Name = "Connect_lbl";
-            this.Connect_lbl.Size = new System.Drawing.Size(123, 21);
+            this.Connect_lbl.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.Connect_lbl.Size = new System.Drawing.Size(118, 21);
             this.Connect_lbl.TabIndex = 5;
-            this.Connect_lbl.Text = "Disconnected ";
+            this.Connect_lbl.Text = "Disconnected";
             // 
             // Alarm_gb
             // 
@@ -698,36 +729,324 @@
             // 
             // IO_gb
             // 
-            this.IO_gb.Controls.Add(this.IOConnect_btn);
-            this.IO_gb.Controls.Add(this.P00_btn);
+            this.IO_gb.Controls.Add(this.Output_pnl);
+            this.IO_gb.Controls.Add(this.IOInitialize_lbl);
+            this.IO_gb.Controls.Add(this.IOInitialize_btn);
             this.IO_gb.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.IO_gb.Location = new System.Drawing.Point(12, 444);
+            this.IO_gb.Location = new System.Drawing.Point(12, 443);
             this.IO_gb.Name = "IO_gb";
-            this.IO_gb.Size = new System.Drawing.Size(300, 97);
+            this.IO_gb.Size = new System.Drawing.Size(339, 191);
             this.IO_gb.TabIndex = 11;
             this.IO_gb.TabStop = false;
             this.IO_gb.Text = "I/O";
             // 
-            // IOConnect_btn
+            // Output_pnl
             // 
-            this.IOConnect_btn.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.IOConnect_btn.Location = new System.Drawing.Point(6, 32);
-            this.IOConnect_btn.Name = "IOConnect_btn";
-            this.IOConnect_btn.Size = new System.Drawing.Size(110, 27);
-            this.IOConnect_btn.TabIndex = 1;
-            this.IOConnect_btn.Text = "Connect";
-            this.IOConnect_btn.UseVisualStyleBackColor = true;
-            this.IOConnect_btn.Click += new System.EventHandler(this.IOConnect_btn_Click);
+            this.Output_pnl.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.Output_pnl.Controls.Add(this.P07_btn);
+            this.Output_pnl.Controls.Add(this.label10);
+            this.Output_pnl.Controls.Add(this.Bit_lbl);
+            this.Output_pnl.Controls.Add(this.P06_btn);
+            this.Output_pnl.Controls.Add(this.Bit0_lbl);
+            this.Output_pnl.Controls.Add(this.P05_btn);
+            this.Output_pnl.Controls.Add(this.Bit1_lbl);
+            this.Output_pnl.Controls.Add(this.P04_btn);
+            this.Output_pnl.Controls.Add(this.Bit2_lbl);
+            this.Output_pnl.Controls.Add(this.P03_btn);
+            this.Output_pnl.Controls.Add(this.Bit3_lbl);
+            this.Output_pnl.Controls.Add(this.P02_btn);
+            this.Output_pnl.Controls.Add(this.Bit4_lbl);
+            this.Output_pnl.Controls.Add(this.P01_btn);
+            this.Output_pnl.Controls.Add(this.Bit5_lbl);
+            this.Output_pnl.Controls.Add(this.P00_btn);
+            this.Output_pnl.Controls.Add(this.P17_btn);
+            this.Output_pnl.Controls.Add(this.Bit6_lbl);
+            this.Output_pnl.Controls.Add(this.P16_btn);
+            this.Output_pnl.Controls.Add(this.Bit7_lbl);
+            this.Output_pnl.Controls.Add(this.P15_btn);
+            this.Output_pnl.Controls.Add(this.Port1_lbl);
+            this.Output_pnl.Controls.Add(this.P14_btn);
+            this.Output_pnl.Controls.Add(this.Port0_lbl);
+            this.Output_pnl.Controls.Add(this.P13_btn);
+            this.Output_pnl.Controls.Add(this.P12_btn);
+            this.Output_pnl.Controls.Add(this.P10_btn);
+            this.Output_pnl.Controls.Add(this.P11_btn);
+            this.Output_pnl.Location = new System.Drawing.Point(6, 65);
+            this.Output_pnl.Name = "Output_pnl";
+            this.Output_pnl.Size = new System.Drawing.Size(327, 120);
+            this.Output_pnl.TabIndex = 12;
+            // 
+            // P07_btn
+            // 
+            this.P07_btn.BackColor = System.Drawing.Color.White;
+            this.P07_btn.Location = new System.Drawing.Point(63, 50);
+            this.P07_btn.Name = "P07_btn";
+            this.P07_btn.Size = new System.Drawing.Size(27, 27);
+            this.P07_btn.TabIndex = 2;
+            this.P07_btn.UseVisualStyleBackColor = false;
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(125, 5);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(64, 21);
+            this.label10.TabIndex = 28;
+            this.label10.Text = "Output";
+            // 
+            // Bit_lbl
+            // 
+            this.Bit_lbl.AutoSize = true;
+            this.Bit_lbl.Location = new System.Drawing.Point(-1, 29);
+            this.Bit_lbl.Name = "Bit_lbl";
+            this.Bit_lbl.Size = new System.Drawing.Size(33, 21);
+            this.Bit_lbl.TabIndex = 27;
+            this.Bit_lbl.Text = "Bit";
+            // 
+            // P06_btn
+            // 
+            this.P06_btn.BackColor = System.Drawing.Color.White;
+            this.P06_btn.Location = new System.Drawing.Point(96, 50);
+            this.P06_btn.Name = "P06_btn";
+            this.P06_btn.Size = new System.Drawing.Size(27, 27);
+            this.P06_btn.TabIndex = 3;
+            this.P06_btn.UseVisualStyleBackColor = false;
+            // 
+            // Bit0_lbl
+            // 
+            this.Bit0_lbl.AutoSize = true;
+            this.Bit0_lbl.Location = new System.Drawing.Point(301, 29);
+            this.Bit0_lbl.Name = "Bit0_lbl";
+            this.Bit0_lbl.Size = new System.Drawing.Size(20, 21);
+            this.Bit0_lbl.TabIndex = 26;
+            this.Bit0_lbl.Text = "0";
+            // 
+            // P05_btn
+            // 
+            this.P05_btn.BackColor = System.Drawing.Color.White;
+            this.P05_btn.Location = new System.Drawing.Point(129, 50);
+            this.P05_btn.Name = "P05_btn";
+            this.P05_btn.Size = new System.Drawing.Size(27, 27);
+            this.P05_btn.TabIndex = 4;
+            this.P05_btn.UseVisualStyleBackColor = false;
+            // 
+            // Bit1_lbl
+            // 
+            this.Bit1_lbl.AutoSize = true;
+            this.Bit1_lbl.Location = new System.Drawing.Point(268, 29);
+            this.Bit1_lbl.Name = "Bit1_lbl";
+            this.Bit1_lbl.Size = new System.Drawing.Size(20, 21);
+            this.Bit1_lbl.TabIndex = 25;
+            this.Bit1_lbl.Text = "1";
+            // 
+            // P04_btn
+            // 
+            this.P04_btn.BackColor = System.Drawing.Color.White;
+            this.P04_btn.Location = new System.Drawing.Point(162, 50);
+            this.P04_btn.Name = "P04_btn";
+            this.P04_btn.Size = new System.Drawing.Size(27, 27);
+            this.P04_btn.TabIndex = 5;
+            this.P04_btn.UseVisualStyleBackColor = false;
+            // 
+            // Bit2_lbl
+            // 
+            this.Bit2_lbl.AutoSize = true;
+            this.Bit2_lbl.Location = new System.Drawing.Point(235, 29);
+            this.Bit2_lbl.Name = "Bit2_lbl";
+            this.Bit2_lbl.Size = new System.Drawing.Size(20, 21);
+            this.Bit2_lbl.TabIndex = 24;
+            this.Bit2_lbl.Text = "2";
+            // 
+            // P03_btn
+            // 
+            this.P03_btn.BackColor = System.Drawing.Color.White;
+            this.P03_btn.Location = new System.Drawing.Point(195, 50);
+            this.P03_btn.Name = "P03_btn";
+            this.P03_btn.Size = new System.Drawing.Size(27, 27);
+            this.P03_btn.TabIndex = 6;
+            this.P03_btn.UseVisualStyleBackColor = false;
+            // 
+            // Bit3_lbl
+            // 
+            this.Bit3_lbl.AutoSize = true;
+            this.Bit3_lbl.Location = new System.Drawing.Point(202, 29);
+            this.Bit3_lbl.Name = "Bit3_lbl";
+            this.Bit3_lbl.Size = new System.Drawing.Size(20, 21);
+            this.Bit3_lbl.TabIndex = 23;
+            this.Bit3_lbl.Text = "3";
+            // 
+            // P02_btn
+            // 
+            this.P02_btn.BackColor = System.Drawing.Color.White;
+            this.P02_btn.Location = new System.Drawing.Point(228, 50);
+            this.P02_btn.Name = "P02_btn";
+            this.P02_btn.Size = new System.Drawing.Size(27, 27);
+            this.P02_btn.TabIndex = 7;
+            this.P02_btn.UseVisualStyleBackColor = false;
+            // 
+            // Bit4_lbl
+            // 
+            this.Bit4_lbl.AutoSize = true;
+            this.Bit4_lbl.Location = new System.Drawing.Point(169, 29);
+            this.Bit4_lbl.Name = "Bit4_lbl";
+            this.Bit4_lbl.Size = new System.Drawing.Size(20, 21);
+            this.Bit4_lbl.TabIndex = 22;
+            this.Bit4_lbl.Text = "4";
+            // 
+            // P01_btn
+            // 
+            this.P01_btn.BackColor = System.Drawing.Color.White;
+            this.P01_btn.Location = new System.Drawing.Point(261, 50);
+            this.P01_btn.Name = "P01_btn";
+            this.P01_btn.Size = new System.Drawing.Size(27, 27);
+            this.P01_btn.TabIndex = 8;
+            this.P01_btn.UseVisualStyleBackColor = false;
+            // 
+            // Bit5_lbl
+            // 
+            this.Bit5_lbl.AutoSize = true;
+            this.Bit5_lbl.Location = new System.Drawing.Point(136, 29);
+            this.Bit5_lbl.Name = "Bit5_lbl";
+            this.Bit5_lbl.Size = new System.Drawing.Size(20, 21);
+            this.Bit5_lbl.TabIndex = 21;
+            this.Bit5_lbl.Text = "5";
             // 
             // P00_btn
             // 
-            this.P00_btn.BackColor = System.Drawing.Color.Green;
-            this.P00_btn.Location = new System.Drawing.Point(126, 32);
+            this.P00_btn.BackColor = System.Drawing.Color.White;
+            this.P00_btn.Location = new System.Drawing.Point(294, 50);
             this.P00_btn.Name = "P00_btn";
             this.P00_btn.Size = new System.Drawing.Size(27, 27);
             this.P00_btn.TabIndex = 0;
             this.P00_btn.UseVisualStyleBackColor = false;
-            this.P00_btn.Click += new System.EventHandler(this.P00_btn_Click);
+            // 
+            // P17_btn
+            // 
+            this.P17_btn.BackColor = System.Drawing.Color.White;
+            this.P17_btn.Location = new System.Drawing.Point(63, 83);
+            this.P17_btn.Name = "P17_btn";
+            this.P17_btn.Size = new System.Drawing.Size(27, 27);
+            this.P17_btn.TabIndex = 10;
+            this.P17_btn.UseVisualStyleBackColor = false;
+            // 
+            // Bit6_lbl
+            // 
+            this.Bit6_lbl.AutoSize = true;
+            this.Bit6_lbl.Location = new System.Drawing.Point(103, 29);
+            this.Bit6_lbl.Name = "Bit6_lbl";
+            this.Bit6_lbl.Size = new System.Drawing.Size(20, 21);
+            this.Bit6_lbl.TabIndex = 20;
+            this.Bit6_lbl.Text = "6";
+            // 
+            // P16_btn
+            // 
+            this.P16_btn.BackColor = System.Drawing.Color.White;
+            this.P16_btn.Location = new System.Drawing.Point(96, 83);
+            this.P16_btn.Name = "P16_btn";
+            this.P16_btn.Size = new System.Drawing.Size(27, 27);
+            this.P16_btn.TabIndex = 11;
+            this.P16_btn.UseVisualStyleBackColor = false;
+            // 
+            // Bit7_lbl
+            // 
+            this.Bit7_lbl.AutoSize = true;
+            this.Bit7_lbl.Location = new System.Drawing.Point(70, 29);
+            this.Bit7_lbl.Name = "Bit7_lbl";
+            this.Bit7_lbl.Size = new System.Drawing.Size(20, 21);
+            this.Bit7_lbl.TabIndex = 19;
+            this.Bit7_lbl.Text = "7";
+            // 
+            // P15_btn
+            // 
+            this.P15_btn.BackColor = System.Drawing.Color.White;
+            this.P15_btn.Location = new System.Drawing.Point(129, 83);
+            this.P15_btn.Name = "P15_btn";
+            this.P15_btn.Size = new System.Drawing.Size(27, 27);
+            this.P15_btn.TabIndex = 12;
+            this.P15_btn.UseVisualStyleBackColor = false;
+            // 
+            // Port1_lbl
+            // 
+            this.Port1_lbl.AutoSize = true;
+            this.Port1_lbl.Location = new System.Drawing.Point(-1, 89);
+            this.Port1_lbl.Name = "Port1_lbl";
+            this.Port1_lbl.Size = new System.Drawing.Size(58, 21);
+            this.Port1_lbl.TabIndex = 18;
+            this.Port1_lbl.Text = "Port 1";
+            // 
+            // P14_btn
+            // 
+            this.P14_btn.BackColor = System.Drawing.Color.White;
+            this.P14_btn.Location = new System.Drawing.Point(162, 83);
+            this.P14_btn.Name = "P14_btn";
+            this.P14_btn.Size = new System.Drawing.Size(27, 27);
+            this.P14_btn.TabIndex = 13;
+            this.P14_btn.UseVisualStyleBackColor = false;
+            // 
+            // Port0_lbl
+            // 
+            this.Port0_lbl.AutoSize = true;
+            this.Port0_lbl.Location = new System.Drawing.Point(-1, 56);
+            this.Port0_lbl.Name = "Port0_lbl";
+            this.Port0_lbl.Size = new System.Drawing.Size(58, 21);
+            this.Port0_lbl.TabIndex = 17;
+            this.Port0_lbl.Text = "Port 0";
+            // 
+            // P13_btn
+            // 
+            this.P13_btn.BackColor = System.Drawing.Color.White;
+            this.P13_btn.Location = new System.Drawing.Point(195, 83);
+            this.P13_btn.Name = "P13_btn";
+            this.P13_btn.Size = new System.Drawing.Size(27, 27);
+            this.P13_btn.TabIndex = 14;
+            this.P13_btn.UseVisualStyleBackColor = false;
+            // 
+            // P12_btn
+            // 
+            this.P12_btn.BackColor = System.Drawing.Color.White;
+            this.P12_btn.Location = new System.Drawing.Point(228, 83);
+            this.P12_btn.Name = "P12_btn";
+            this.P12_btn.Size = new System.Drawing.Size(27, 27);
+            this.P12_btn.TabIndex = 15;
+            this.P12_btn.UseVisualStyleBackColor = false;
+            // 
+            // P10_btn
+            // 
+            this.P10_btn.BackColor = System.Drawing.Color.White;
+            this.P10_btn.Location = new System.Drawing.Point(294, 83);
+            this.P10_btn.Name = "P10_btn";
+            this.P10_btn.Size = new System.Drawing.Size(27, 27);
+            this.P10_btn.TabIndex = 9;
+            this.P10_btn.UseVisualStyleBackColor = false;
+            // 
+            // P11_btn
+            // 
+            this.P11_btn.BackColor = System.Drawing.Color.White;
+            this.P11_btn.Location = new System.Drawing.Point(261, 83);
+            this.P11_btn.Name = "P11_btn";
+            this.P11_btn.Size = new System.Drawing.Size(27, 27);
+            this.P11_btn.TabIndex = 16;
+            this.P11_btn.UseVisualStyleBackColor = false;
+            // 
+            // IOInitialize_lbl
+            // 
+            this.IOInitialize_lbl.AutoSize = true;
+            this.IOInitialize_lbl.Location = new System.Drawing.Point(122, 34);
+            this.IOInitialize_lbl.Name = "IOInitialize_lbl";
+            this.IOInitialize_lbl.Size = new System.Drawing.Size(111, 21);
+            this.IOInitialize_lbl.TabIndex = 29;
+            this.IOInitialize_lbl.Text = "Uninitialized";
+            // 
+            // IOInitialize_btn
+            // 
+            this.IOInitialize_btn.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.IOInitialize_btn.Location = new System.Drawing.Point(6, 32);
+            this.IOInitialize_btn.Name = "IOInitialize_btn";
+            this.IOInitialize_btn.Size = new System.Drawing.Size(110, 27);
+            this.IOInitialize_btn.TabIndex = 1;
+            this.IOInitialize_btn.Text = "Initialize";
+            this.IOInitialize_btn.UseVisualStyleBackColor = true;
+            this.IOInitialize_btn.Click += new System.EventHandler(this.IOInitialize_btn_Click);
             // 
             // instantDoCtrl1
             // 
@@ -737,7 +1056,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(864, 562);
+            this.ClientSize = new System.Drawing.Size(864, 687);
             this.Controls.Add(this.IO_gb);
             this.Controls.Add(this.PositionMove_gb);
             this.Controls.Add(this.PositionSet_gb);
@@ -763,6 +1082,9 @@
             this.PositionSet_gb.PerformLayout();
             this.PositionMove_gb.ResumeLayout(false);
             this.IO_gb.ResumeLayout(false);
+            this.IO_gb.PerformLayout();
+            this.Output_pnl.ResumeLayout(false);
+            this.Output_pnl.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -825,8 +1147,37 @@
         private System.Windows.Forms.Label VelocityRange_lbl;
         private System.Windows.Forms.GroupBox IO_gb;
         private System.Windows.Forms.Button P00_btn;
-        private System.Windows.Forms.Button IOConnect_btn;
+        private System.Windows.Forms.Button IOInitialize_btn;
         private Automation.BDaq.InstantDoCtrl instantDoCtrl1;
+        private System.Windows.Forms.Label IOInitialize_lbl;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Label Bit_lbl;
+        private System.Windows.Forms.Label Bit0_lbl;
+        private System.Windows.Forms.Label Bit1_lbl;
+        private System.Windows.Forms.Label Bit2_lbl;
+        private System.Windows.Forms.Label Bit3_lbl;
+        private System.Windows.Forms.Label Bit4_lbl;
+        private System.Windows.Forms.Label Bit5_lbl;
+        private System.Windows.Forms.Label Bit6_lbl;
+        private System.Windows.Forms.Label Bit7_lbl;
+        private System.Windows.Forms.Label Port1_lbl;
+        private System.Windows.Forms.Label Port0_lbl;
+        private System.Windows.Forms.Button P11_btn;
+        private System.Windows.Forms.Button P12_btn;
+        private System.Windows.Forms.Button P13_btn;
+        private System.Windows.Forms.Button P14_btn;
+        private System.Windows.Forms.Button P15_btn;
+        private System.Windows.Forms.Button P16_btn;
+        private System.Windows.Forms.Button P17_btn;
+        private System.Windows.Forms.Button P10_btn;
+        private System.Windows.Forms.Button P01_btn;
+        private System.Windows.Forms.Button P02_btn;
+        private System.Windows.Forms.Button P03_btn;
+        private System.Windows.Forms.Button P04_btn;
+        private System.Windows.Forms.Button P05_btn;
+        private System.Windows.Forms.Button P06_btn;
+        private System.Windows.Forms.Button P07_btn;
+        private System.Windows.Forms.Panel Output_pnl;
     }
 }
 
